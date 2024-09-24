@@ -1,2 +1,44 @@
-package org.firstinspires.ftc.teamcode.opmode.teleop.comp;public class Teleop {
+package org.firstinspires.ftc.teamcode.opmode.teleop.comp;
+
+import com.arcrobotics.ftclib.command.button.Trigger;
+import com.arcrobotics.ftclib.gamepad.GamepadKeys;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+
+import org.firstinspires.ftc.teamcode.commnad.HighBasketDeposit;
+import org.firstinspires.ftc.teamcode.commnad.ResetToIntakeCommand;
+import org.firstinspires.ftc.teamcode.commnad.SubmersibleIntakeCommand;
+import org.firstinspires.ftc.teamcode.util.SampleCommandTeleop;
+@TeleOp
+public class Teleop extends SampleCommandTeleop {
+    @Override
+    public void onInit() {
+        robot.drive.setDefaultCommand(robot.drive.getDriveCommand(()->g1.getLeftY(), ()->g1.getRightX()));
+        new Trigger(()->Math.abs(g2.getLeftY())>.05).whileActiveOnce(robot.pivot.getPivotPowerCommand(()->g2.getLeftY(), ()->g2.getButton(GamepadKeys.Button.LEFT_STICK_BUTTON)));
+        new Trigger(()->Math.abs(g2.getRightY())>.05).whileActiveOnce(robot.extendo.getExtendoPowerCommand(()->-g2.getRightY(), ()->g2.getButton(GamepadKeys.Button.RIGHT_STICK_BUTTON)));
+        new Trigger(()->Math.abs(g1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)-g1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER))>.05).whileActiveOnce(robot.climber.getClimberPowerCommand(()->g1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)-g1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)));
+        new Trigger(()->Math.abs(g2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)-g2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER))>.05).whileActiveOnce(robot.claw.getPassthroughManualCommand(()->g2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)-g2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)));
+
+        g2.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenActive(robot.claw::toggleClawOpenClose);
+        g2.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenActive(robot.claw::toggleTwistHorizontalVertical);
+
+        g2.getGamepadButton(GamepadKeys.Button.Y).whenActive(new ResetToIntakeCommand(robot.pivot,robot.extendo,robot.claw));
+        g2.getGamepadButton(GamepadKeys.Button.B).whenActive(new HighBasketDeposit(robot.pivot,robot.extendo,robot.claw));
+        g2.getGamepadButton(GamepadKeys.Button.A).whenActive(new SubmersibleIntakeCommand(robot.pivot,robot.extendo,robot.claw));
+
+    }
+
+    @Override
+    public void onStart() {
+
+    }
+
+    @Override
+    public void onLoop() {
+
+    }
+
+    @Override
+    public void onStop() {
+
+    }
 }

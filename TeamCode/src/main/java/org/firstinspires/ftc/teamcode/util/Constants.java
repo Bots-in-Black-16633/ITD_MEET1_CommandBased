@@ -2,14 +2,9 @@ package org.firstinspires.ftc.teamcode.util;
 
 import androidx.annotation.NonNull;
 
-import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
-import com.acmerobotics.roadrunner.Action;
-import com.acmerobotics.roadrunner.ftc.Actions;
+
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 
-import org.firstinspires.ftc.teamcode.subsystem.Claw;
-import org.firstinspires.ftc.teamcode.subsystem.ExtendoSubsystem;
-import org.firstinspires.ftc.teamcode.subsystem.PivotSubsystem;
 
 public final class Constants {
 
@@ -60,98 +55,6 @@ public final class Constants {
 
         public static final double clawClose = .58;
         public static final double clawOpen = .91;
-    }
-
-    public static final class ActionsClass{
-       public static class ResetExtendoPivot implements  Action{
-            PivotSubsystem p;
-            ExtendoSubsystem e;
-            Claw claw;
-
-            public ResetExtendoPivot(PivotSubsystem p, ExtendoSubsystem e,Claw claw){
-                this.p=p;
-                this.e=e;
-                this.claw=claw;
-            }
-            @Override
-            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-                e.runToPosition(ExtendoConstants.rest, 1);
-                claw.getRestPosition();
-                Actions.runBlocking(claw.getRestPosition());
-                while(e.abovePosition(ExtendoConstants.rest+500)){
-
-                }
-                p.runToPosition(PivotConstants.rest,1);
-
-                return false;
-            }
-        }
-
-        public static class SubmersibleIntake implements Action{
-            PivotSubsystem p;
-            ExtendoSubsystem e;
-            Claw claw;
-            public SubmersibleIntake(PivotSubsystem p, ExtendoSubsystem e, Claw claw){
-                this.p=p;this.e=e;this.claw=claw;
-            }
-            @Override
-            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-                p.runToPosition(PivotConstants.submersibleIntake,1);
-
-                while(p.belowPosition(PivotConstants.submersibleIntake-10)){
-
-                }
-                e.runToPosition(ExtendoConstants.fullExtension, 1);
-                Actions.runBlocking(claw.getVerticalIntake());
-
-                return false;
-            }
-        }
-
-        public static class HighBasketDelivery implements Action{
-            PivotSubsystem p;
-            ExtendoSubsystem e;
-            Claw claw;
-            public HighBasketDelivery(PivotSubsystem p, ExtendoSubsystem e,Claw claw){
-                this.p=p;this.e=e;this.claw=claw;
-            }
-            @Override
-            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-                p.runToPosition(PivotConstants.vertical,1);
-                while(p.belowPosition(PivotConstants.vertical-10)){
-
-                }
-                e.runToPosition(ExtendoConstants.highBasket, 1);
-                Actions.runBlocking(claw.getOutputHighBasket());
-
-                return false;
-            }
-        }
-
-        public static class ResetExtendoPivotAsync implements  Action{
-            PivotSubsystem p;
-            ExtendoSubsystem e;
-            Claw claw;
-
-            public ResetExtendoPivotAsync(PivotSubsystem p, ExtendoSubsystem e,Claw claw){
-                this.p=p;
-                this.e=e;
-                this.claw=claw;
-            }
-            @Override
-            public boolean run(@NonNull TelemetryPacket telemetryPacket) {
-                e.runToPosition(ExtendoConstants.rest, 1);
-                claw.getRestPosition().run(telemetryPacket);
-                if(e.abovePosition(ExtendoConstants.rest+500)){
-                    p.runToPosition(PivotConstants.rest,1);
-
-                }
-
-                return !(Math.abs(e.getPosition()-ExtendoConstants.rest)<1) && (Math.abs(p.getPosition()-PivotConstants.rest)<1);
-            }
-        }
-
-
     }
 
 }

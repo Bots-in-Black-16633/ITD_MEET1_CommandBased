@@ -1,14 +1,14 @@
 package org.firstinspires.ftc.teamcode.util;
 
+
+
 import com.acmerobotics.dashboard.FtcDashboard;
-import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 
-import org.firstinspires.ftc.robotcore.external.Func;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 import org.firstinspires.ftc.robotcore.external.stream.CameraStreamSource;
 
-public class ColorfulTelemetry  {
+public class ColorfulTelemetry {
     private Telemetry telemetry;
     private TelemetryPacket packet;
 
