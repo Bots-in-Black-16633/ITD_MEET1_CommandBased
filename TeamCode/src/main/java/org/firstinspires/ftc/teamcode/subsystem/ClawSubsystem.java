@@ -55,23 +55,28 @@ public class ClawSubsystem extends BIBSubsystemBase {
         else twistHorizontal();
     }
     public void twistHorizontal(){
-        twist.setPosition(Constants.ClawConstants.openTowardsExpansion);
+        twist.setPosition(Constants.ClawConstants.openTowardsControlHub);
         twistIsHorizontal = true;
 
     }
     public void twistVerticalIntake(){
-        twist.setPosition(Constants.ClawConstants.openOutwards);
+        twist.setPosition(Constants.ClawConstants.openTowardsBelt);
         twistIsHorizontal = false;
 
     }
 
     //Commands
     public void setOutputHighBasket(){
-        setTwistPosition(Constants.ClawConstants.openTowardsBelt);
+        setTwistPosition(Constants.ClawConstants.openTowardsControlHub);
         passthrough.setPosition(Constants.ClawConstants.highBasketOutput);
     }
+    public void setOutputLowBasket(){
+        setTwistPosition(Constants.ClawConstants.openTowardsControlHub);
+        passthrough.setPosition(Constants.ClawConstants.lowBasketOutput);
+    }
     public void setRestPosition(){
-        twistVerticalIntake();
+        close();
+        twistHorizontal();
         passthrough.setPosition(Constants.ClawConstants.outwardFacing);
     }
 
@@ -85,6 +90,11 @@ public class ClawSubsystem extends BIBSubsystemBase {
     public void setVerticalIntake(){
         twistVerticalIntake();
         passthrough.setPosition(Constants.ClawConstants.inwardFacing);
+
+    }
+    public void specimenDelivery(){
+        twist.setPosition(Constants.ClawConstants.openTowardsControlHub);
+        passthrough.setPosition(.95);
 
     }
 

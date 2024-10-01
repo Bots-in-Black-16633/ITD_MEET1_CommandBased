@@ -27,6 +27,6 @@ public class ExtendoRunToCommand extends CommandBase {
 
     @Override
     public void end(boolean inter){
-        extendo.runToPosition(position,1);
+        extendo.runToPosition(position,.5);
     }
 }

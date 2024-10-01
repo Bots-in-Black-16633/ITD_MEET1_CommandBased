@@ -58,6 +58,8 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
     }
 
     public void resetEncoders(int motorType){
+        leftSlider.setPower(0);
+        rightSlider.setPower(0);
         if(motorType==bothMotors||motorType==ExtendoSubsystem.leftMotor){
             leftSlider.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             leftSlider.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -74,7 +76,7 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
     }
 
     public int getPosition(){
-        return leftSlider.getCurrentPosition();
+        return rightSlider.getCurrentPosition();
     }
 
     public boolean belowPosition(int position){
@@ -87,8 +89,8 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
     public void printTelemetry(ColorfulTelemetry t) {
         t.addLine();
         t.addLine("____SLIDER_____");
-        t.addLine("LEFT SLIDER : " + leftSlider.getCurrentPosition() + " Power: " + leftSlider.getPower());
-        t.addLine("RIGHT SLIDER (FOLLOWER)" + rightSlider.getCurrentPosition() + " Power: " + rightSlider.getPower());
+        t.addLine("LEFT SLIDER : " + leftSlider.getCurrentPosition() + " Power: " + leftSlider.getPower() + "VEL" + leftSlider.getVelocity());
+        t.addLine("RIGHT SLIDER (FOLLOWER)" + rightSlider.getCurrentPosition() + " Power: " + rightSlider.getPower() + "VEL" + rightSlider.getVelocity());
 
     }
 
@@ -101,7 +103,7 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
         return this.runEnd(()->{
             setPower((increaseSpeed.getAsBoolean()?3:1)*sliderPower.getAsDouble()*.25);
         },()->{
-            runToPosition(getPosition(), 1);
+            runToPosition(getPosition(), .5);
         });
     }
 }

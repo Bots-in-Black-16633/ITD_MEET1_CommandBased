@@ -46,6 +46,11 @@ public class DriveSubsystem extends BIBSubsystemBase  {
         leftDrive.setPower(leftPower);
         rightDrive.setPower(rightPower);
     }
+    public void driveBumperCars(double leftPower, double rightPower){
+
+        leftDrive.setPower(leftPower);
+        rightDrive.setPower(rightPower);
+    }
 
 
     public void printTelemetry(ColorfulTelemetry t) {
@@ -60,6 +65,11 @@ public class DriveSubsystem extends BIBSubsystemBase  {
 
     public CommandBase getDriveCommand(DoubleSupplier lateralPower, DoubleSupplier rotPower){
         return this.runEnd(()->{this.drive(lateralPower.getAsDouble(), rotPower.getAsDouble());}, ()->{
+            this.drive(0,0);
+        });
+    }
+    public CommandBase getBumperCarsDriveCommand(DoubleSupplier leftPower, DoubleSupplier rightPower){
+        return this.runEnd(()->{this.driveBumperCars(leftPower.getAsDouble(), rightPower.getAsDouble());}, ()->{
             this.drive(0,0);
         });
     }
