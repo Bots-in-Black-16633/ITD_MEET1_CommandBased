@@ -33,7 +33,6 @@ public abstract class SampleCommandTeleop extends LinearOpMode {
         }
         onStop();
         CommandScheduler.getInstance().reset();
-
     }
 
     /**

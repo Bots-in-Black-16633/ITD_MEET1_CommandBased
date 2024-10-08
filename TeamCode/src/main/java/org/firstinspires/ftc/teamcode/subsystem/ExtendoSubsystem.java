@@ -85,6 +85,13 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
     public boolean abovePosition(int position){
         return getPosition() > position;
     }
+
+    public double getLeftVelocity(){
+        return Math.abs(leftSlider.getVelocity());
+    }
+    public double getRightVelocity(){
+        return Math.abs(rightSlider.getVelocity());
+    }
     @Override
     public void printTelemetry(ColorfulTelemetry t) {
         t.addLine();

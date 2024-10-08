@@ -96,7 +96,7 @@ public class PivotSubsystem extends BIBSubsystemBase{
 
     public CommandBase getPivotPowerCommand(DoubleSupplier power, BooleanSupplier increaseSpeed){
         return this.runEnd(()->{
-            setPower((increaseSpeed.getAsBoolean()?2.5:1)*power.getAsDouble()*.25); },()->{
+            setPower((increaseSpeed.getAsBoolean()?3:2)*power.getAsDouble()*.25); },()->{
             runToPosition(getPosition(), 1);
         });
     }
