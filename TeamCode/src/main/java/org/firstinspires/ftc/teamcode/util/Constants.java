@@ -64,4 +64,14 @@ public final class Constants {
         public static final double clawOpen = .75;
     }
 
+    public static final class WristConstants{
+        public static final double facingBelts = .144;
+        public static final double facingStraightParallel = .386;
+        public static final double facingOppositeBelts = .654;
+        public static final double minimum = .06;
+        public static final double maximum = .7;
+
+
+    }
+
 }

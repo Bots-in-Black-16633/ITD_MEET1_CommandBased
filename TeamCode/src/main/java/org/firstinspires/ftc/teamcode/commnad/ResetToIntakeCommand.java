@@ -9,20 +9,21 @@ import org.firstinspires.ftc.onbotjava.OnBotJavaStandardFileManager;
 import org.firstinspires.ftc.teamcode.subsystem.ClawSubsystem;
 import org.firstinspires.ftc.teamcode.subsystem.ExtendoSubsystem;
 import org.firstinspires.ftc.teamcode.subsystem.PivotSubsystem;
+import org.firstinspires.ftc.teamcode.subsystem.WristSubsystem;
 import org.firstinspires.ftc.teamcode.util.Constants;
 
 public class ResetToIntakeCommand extends SequentialCommandGroup {
 
-    public ResetToIntakeCommand(PivotSubsystem pivot, ExtendoSubsystem extendo, ClawSubsystem claw) {
+    public ResetToIntakeCommand(PivotSubsystem pivot, ExtendoSubsystem extendo, WristSubsystem wrist) {
 
         addCommands(
-                new ConditionalCommand(new SequentialCommandGroup(new InstantCommand(claw::setHorizontalIntake),new WaitCommand(1000)),new InstantCommand(claw::setRestPosition),()->extendo.getPosition()> Constants.ExtendoConstants.highBasket-200 && pivot.getPosition() > Constants.PivotConstants.submersibleIntake+200),
+                new ConditionalCommand(new SequentialCommandGroup(new InstantCommand(wrist::setFacingOppositeBelts),new WaitCommand(1000)),new InstantCommand(wrist::setFacingStraightParallelToSlider),()->extendo.getPosition()> Constants.ExtendoConstants.highBasket-200 && pivot.getPosition() > Constants.PivotConstants.submersibleIntake+200),
 
                 new ConditionalCommand(new PivotRunToCommand(pivot, Constants.PivotConstants.submersibleIntake),new InstantCommand(),()->pivot.getPosition() < Constants.PivotConstants.submersibleIntake),
-                new InstantCommand(claw::setRestPosition),
+                new InstantCommand(wrist::setFacingStraightParallelToSlider),
                 new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.rest), new PivotRunToCommand(pivot, Constants.PivotConstants.rest)
         );
 
-        addRequirements(pivot, extendo, claw);
+        addRequirements(pivot, extendo, wrist);
     }
 }
