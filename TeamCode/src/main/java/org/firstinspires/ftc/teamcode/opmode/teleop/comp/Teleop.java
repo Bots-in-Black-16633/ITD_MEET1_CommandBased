@@ -17,12 +17,12 @@ import org.firstinspires.ftc.teamcode.util.SampleCommandTeleop;
 public class Teleop extends SampleCommandTeleop {
     @Override
     public void onInit() {
-        //robot.drive.setDefaultCommand(robot.drive.getBumperCarsDriveCommand(()->g1.getLeftY(), ()->-g1.getRightY()));
+        robot.drive.setDefaultCommand(robot.drive.getDriveCommand(()->-g1.getLeftX(),()->g1.getLeftY(), ()->-g1.getRightX()));
         new Trigger(()->Math.abs(g2.getLeftY())>.05).whileActiveOnce(robot.pivot.getPivotPowerCommand(()->g2.getLeftY(), ()->g2.getButton(GamepadKeys.Button.LEFT_STICK_BUTTON)));
         new Trigger(()->Math.abs(g2.getRightY())>.05).whileActiveOnce(robot.extendo.getExtendoPowerCommand(()->-g2.getRightY(), ()->g2.getButton(GamepadKeys.Button.RIGHT_STICK_BUTTON)));
 //        new Trigger(()->Math.abs(g1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)-g1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER))>.05).whileActiveOnce(robot.climber.getClimberPowerCommand(()->g1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)-g1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)));
         new Trigger(()->Math.abs(g2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)-g2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER))>.05).whileActiveOnce(robot.wrist.getManualControlCommand(()->g2.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)-g2.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)));
-
+        g1.getGamepadButton(GamepadKeys.Button.A).whenActive(robot.drive::resetImu);
 //        g2.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whenActive(robot.claw::toggleClawOpenClose);
 //        g2.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whenActive(robot.claw::toggleTwistHorizontalVertical);
 
