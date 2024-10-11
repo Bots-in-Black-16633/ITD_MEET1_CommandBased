@@ -67,20 +67,35 @@ public class DriveSubsystem extends BIBSubsystemBase  {
 
     public void printTelemetry(ColorfulTelemetry t) {
         t.addLine("");
-//        t.addLine("RightDrive: pow: " + rightDrive.getPower() + " encod: " + rightDrive.getCurrentPosition());
-//        t.addLine("LeftDrive: pow: " + leftDrive.getPower() + " encod: " + leftDrive.getCurrentPosition());
-//        t.addLine("IMU Yaw: " + imu.getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES));
+        t.addLine("MOTOR POWERS");
+        t.addLine(String.format("     %1$s     %2$s", Constants.Util.round(drive.leftFront.getPower(),2), Constants.Util.round(drive.rightFront.getPower(),2)));
+        t.addLine(String.format("     %1$s     %2$s", Constants.Util.round(drive.leftBack.getPower(),2), Constants.Util.round(drive.rightBack.getPower(),2)));
+        t.addLine();
+        t.addLine("IMU STUFF");
+        t.addLine("IMU (RAW) " + drive.lazyImu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES));
+        t.addLine("IMU (Modified) " + drive.getHeading());//modified with intial heading and
+        t.addLine("Initial Heading" + drive.initialHeading);
+        t.addLine("Offset Heading" + drive.headingOffset);
+        t.addLine();
+        t.addLine("ODO");
+        t.addLine("position x" + drive.pose.position.x);
+        t.addLine("position y" + drive.pose.position.y);
+        t.addLine("odo heading" + Math.toDegrees(drive.pose.heading.log()));
+        t.addLine();
+
+        t.addLine("EXTRA");
+
         t.addLine("IMU PITCH: " + drive.lazyImu.get().getRobotYawPitchRollAngles().getPitch(AngleUnit.DEGREES));
         t.addLine("IMU Roll: " + drive.lazyImu.get().getRobotYawPitchRollAngles().getRoll(AngleUnit.DEGREES));
 
     }
 
-    public CommandBase getDriveCommand(DoubleSupplier yPow,DoubleSupplier xPow, DoubleSupplier rotPower){
+    public CommandBase getDriveCommand(DoubleSupplier xPow,DoubleSupplier yPow, DoubleSupplier rotPower){
         return this.runEnd(()->{drive(xPow.getAsDouble(),yPow.getAsDouble(), rotPower.getAsDouble());}, ()->{
             rest();
         });
     }
-    public CommandBase getDriveFieldcentric(DoubleSupplier yPow,DoubleSupplier xPow, DoubleSupplier rotPower){
+    public CommandBase getDriveFieldcentric(DoubleSupplier xPow,DoubleSupplier yPow, DoubleSupplier rotPower){
         return this.runEnd(()->{driveFieldcentric(xPow.getAsDouble(),yPow.getAsDouble(), rotPower.getAsDouble(),1);}, ()->{
             rest();
         });

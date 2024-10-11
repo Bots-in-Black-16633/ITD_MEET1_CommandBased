@@ -17,7 +17,7 @@ import org.firstinspires.ftc.teamcode.util.SampleCommandTeleop;
 public class Teleop extends SampleCommandTeleop {
     @Override
     public void onInit() {
-        robot.drive.setDefaultCommand(robot.drive.getDriveCommand(()->-g1.getLeftX(),()->g1.getLeftY(), ()->-g1.getRightX()));
+        robot.drive.setDefaultCommand(robot.drive.getDriveFieldcentric(()->-g1.getLeftX(),()->g1.getLeftY(), ()->-g1.getRightX()));
         new Trigger(()->Math.abs(g2.getLeftY())>.05).whileActiveOnce(robot.pivot.getPivotPowerCommand(()->g2.getLeftY(), ()->g2.getButton(GamepadKeys.Button.LEFT_STICK_BUTTON)));
         new Trigger(()->Math.abs(g2.getRightY())>.05).whileActiveOnce(robot.extendo.getExtendoPowerCommand(()->-g2.getRightY(), ()->g2.getButton(GamepadKeys.Button.RIGHT_STICK_BUTTON)));
 //        new Trigger(()->Math.abs(g1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)-g1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER))>.05).whileActiveOnce(robot.climber.getClimberPowerCommand(()->g1.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER)-g1.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER)));

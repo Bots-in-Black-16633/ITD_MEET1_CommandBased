@@ -35,7 +35,7 @@ public class ExtendoRunToCommand extends CommandBase {
 
     @Override
     public boolean isFinished(){
-        return Math.abs(extendo.getPosition()-position)<10;
+        return Math.abs(extendo.getPosition()-position)<100;
     }
 
     @Override

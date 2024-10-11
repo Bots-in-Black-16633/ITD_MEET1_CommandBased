@@ -205,9 +205,12 @@ public final class MecanumDrive {
             );
         }
     }
+    public double initialHeading;
+    public double headingOffset =90;//indegrees
 
     public MecanumDrive(HardwareMap hardwareMap, Pose2d pose) {
         this.pose = pose;
+        initialHeading = Math.toDegrees(pose.heading.log());
 
         LynxFirmware.throwIfModulesAreOutdated(hardwareMap);
 
@@ -487,4 +490,8 @@ public final class MecanumDrive {
                 defaultVelConstraint, defaultAccelConstraint
         );
     }
+    public double getHeading(){
+        return lazyImu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS)+Math.toRadians(initialHeading)+Math.toRadians(headingOffset);
+    }
+
 }
