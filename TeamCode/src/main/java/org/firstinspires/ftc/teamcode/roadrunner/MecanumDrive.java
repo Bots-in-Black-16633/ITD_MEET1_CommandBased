@@ -205,12 +205,12 @@ public final class MecanumDrive {
             );
         }
     }
-    public double initialHeading;
+    public double initialHeading = 0;
     public double headingOffset =90;//indegrees
 
     public MecanumDrive(HardwareMap hardwareMap, Pose2d pose) {
         this.pose = pose;
-        initialHeading = Math.toDegrees(pose.heading.log());
+
 
         LynxFirmware.throwIfModulesAreOutdated(hardwareMap);
 
@@ -238,6 +238,9 @@ public final class MecanumDrive {
         //   see https://ftc-docs.firstinspires.org/en/latest/hardware_and_software_configuration/configuring/index.html
         lazyImu = new LazyImu(hardwareMap, "imu", new RevHubOrientationOnRobot(
                 PARAMS.logoFacingDirection, PARAMS.usbFacingDirection));
+
+        resetImu();
+        initialHeading = Math.toDegrees(pose.heading.log());
 
         voltageSensor = hardwareMap.voltageSensor.iterator().next();
 
@@ -493,5 +496,9 @@ public final class MecanumDrive {
     public double getHeading(){
         return lazyImu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS)+Math.toRadians(initialHeading)+Math.toRadians(headingOffset);
     }
+    public void resetImu(){
+        lazyImu.get().resetYaw();
+    }
+
 
 }

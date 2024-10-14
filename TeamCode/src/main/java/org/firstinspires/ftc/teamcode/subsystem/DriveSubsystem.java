@@ -24,16 +24,13 @@ public class DriveSubsystem extends BIBSubsystemBase  {
 
     public DriveSubsystem(HardwareMap hwMap, Pose2d startPos){
 
-        drive = new MecanumDrive(hwMap,startPos);
+        this.drive = new MecanumDrive(hwMap,startPos);
 
     }
 
 
     public double getHeading(){
         return drive.lazyImu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS);
-    }
-    public void resetImu(){
-        drive.lazyImu.get().resetYaw();
     }
 
     /**
@@ -73,7 +70,7 @@ public class DriveSubsystem extends BIBSubsystemBase  {
         t.addLine();
         t.addLine("IMU STUFF");
         t.addLine("IMU (RAW) " + drive.lazyImu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES));
-        t.addLine("IMU (Modified) " + drive.getHeading());//modified with intial heading and
+        t.addLine("IMU (Modified) " + Math.toDegrees(drive.getHeading()));//modified with intial heading and
         t.addLine("Initial Heading" + drive.initialHeading);
         t.addLine("Offset Heading" + drive.headingOffset);
         t.addLine();

@@ -10,7 +10,7 @@ public class DriveTester extends SampleCommandTeleop {
     @Override
     public void onInit() {
         robot.drive.setDefaultCommand(robot.drive.getDriveCommand(()->g1.getLeftX(),()->g1.getLeftY(),()->g1.getRightX()));
-        g1.getGamepadButton(GamepadKeys.Button.A).whenActive(robot.drive::resetImu);
+        g1.getGamepadButton(GamepadKeys.Button.A).whenActive(robot.drive.drive::resetImu);
     }
 
     @Override

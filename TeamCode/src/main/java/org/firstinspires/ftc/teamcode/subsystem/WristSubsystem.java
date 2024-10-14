@@ -17,7 +17,9 @@ public class WristSubsystem extends BIBSubsystemBase{
     }
     @Override
     void printTelemetry(ColorfulTelemetry t) {
-
+    t.addLine();
+        t.addLine("WRISST SUBSYSTEM");
+        t.addLine("position"+wrist.getPosition());
     }
 
 
