@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.subsystem;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.teamcode.auto.util.AutoUtil;
 import org.firstinspires.ftc.teamcode.util.ColorfulTelemetry;
 
 public class BaseRobot extends BIBSubsystemBase {
@@ -12,7 +13,7 @@ public class BaseRobot extends BIBSubsystemBase {
     public ExtendoSubsystem extendo;
     public WristSubsystem wrist;
     public IntakeSubsystem intake;
-
+    public AutoUtil autoGenerator;
 
     public BaseRobot(HardwareMap hwMap, Pose2d startPos){
         drive = new DriveSubsystem(hwMap, startPos);
@@ -20,6 +21,7 @@ public class BaseRobot extends BIBSubsystemBase {
         extendo = new ExtendoSubsystem(hwMap);
         wrist = new WristSubsystem(hwMap);
         intake = new IntakeSubsystem(hwMap);
+        autoGenerator = new AutoUtil(drive);
     }
 
 

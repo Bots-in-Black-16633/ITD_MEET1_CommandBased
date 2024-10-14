@@ -1,7 +1,9 @@
 package org.firstinspires.ftc.teamcode.subsystem;
 
 import com.acmerobotics.roadrunner.Pose2d;
+import com.acmerobotics.roadrunner.PoseMap;
 import com.acmerobotics.roadrunner.PoseVelocity2d;
+import com.acmerobotics.roadrunner.TrajectoryActionBuilder;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.arcrobotics.ftclib.command.Command;
 import com.arcrobotics.ftclib.command.CommandBase;
@@ -98,6 +100,16 @@ public class DriveSubsystem extends BIBSubsystemBase  {
         });
     }
 
+    //Methods that pass through Mecanum drive class
+    public TrajectoryActionBuilder actionBuilder(Pose2d startPose) {
+        return drive.actionBuilder(startPose);
+    }
+    public void updatePoseEstimate() {
+        drive.updatePoseEstimate();
+    }
+    public Pose2d getPose() {
+        return drive.pose;
+    }
 
 
     @Override
