@@ -15,7 +15,11 @@ public class ResetToRestCommand extends SequentialCommandGroup {
     public ResetToRestCommand(PivotSubsystem pivot, ExtendoSubsystem extendo, WristSubsystem wrist) {
 
         addCommands(
-                new ConditionalCommand(new SequentialCommandGroup(new InstantCommand(wrist::setFacingStraightParallelToSlider),new WaitCommand(1000)),new InstantCommand(wrist::setFacingStraightParallelToSlider),()->extendo.getPosition()> Constants.ExtendoConstants.highBasket-200 && pivot.getPosition() > Constants.PivotConstants.submersibleIntake+200),
+                new ConditionalCommand(
+                        new SequentialCommandGroup(
+                                new InstantCommand(wrist::setFacingStraightParallelToSlider),
+                                new WaitCommand(1000)),
+                        new InstantCommand(wrist::setFacingStraightParallelToSlider),()->extendo.getPosition()> Constants.ExtendoConstants.highBasket-200 && pivot.getPosition() > Constants.PivotConstants.submersibleIntake+200),
 
                 new ConditionalCommand(new PivotRunToCommand(pivot, Constants.PivotConstants.submersibleIntake),new InstantCommand(),()->pivot.getPosition() < Constants.PivotConstants.submersibleIntake),
 
