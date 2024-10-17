@@ -18,7 +18,7 @@ public class LowBasketDeposit extends SequentialCommandGroup {
             new ResetToIntakeCommand(pivot,extendo,wrist),
                 new PivotRunToCommand(pivot, Constants.PivotConstants.vertical),
                 new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.lowBasket),
-                new InstantCommand(wrist::setFacingBelt)
+                new InstantCommand(wrist::setOuttakeHighBasket)
         );
         addRequirements(pivot, extendo,wrist);
     }

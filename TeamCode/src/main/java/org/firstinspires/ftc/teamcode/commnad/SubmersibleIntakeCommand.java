@@ -16,7 +16,7 @@ public class SubmersibleIntakeCommand extends SequentialCommandGroup {
         addCommands(new ResetToIntakeCommand(pivot,extendo,wrist),
                 new PivotRunToCommand(pivot, Constants.PivotConstants.submersibleIntake),
                 new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.submersibleInitialExtension),
-                new InstantCommand(wrist::setFacingStraightParallelToSlider)
+                new InstantCommand(wrist::setSubmersibleIntake)
         );
         addRequirements(pivot, extendo, wrist);
     }

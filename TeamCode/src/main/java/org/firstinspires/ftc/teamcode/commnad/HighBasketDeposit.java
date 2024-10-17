@@ -17,8 +17,10 @@ public class HighBasketDeposit extends SequentialCommandGroup {
         addCommands(
             new ResetToIntakeCommand(pivot,extendo,wrist),
                 new PivotRunToCommand(pivot, Constants.PivotConstants.vertical),
+                new InstantCommand(wrist::setFacingOppositeBelts),
+
                 new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.highBasket),
-                new InstantCommand(wrist::setFacingBelt)
+                new InstantCommand(wrist::setOuttakeHighBasket)
         );
         addRequirements(pivot, extendo,wrist);
     }

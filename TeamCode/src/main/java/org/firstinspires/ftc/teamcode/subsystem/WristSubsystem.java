@@ -32,6 +32,12 @@ public class WristSubsystem extends BIBSubsystemBase{
     public void setFacingOppositeBelts(){
         wrist.setPosition(Constants.WristConstants.facingOppositeBelts);
     }
+    public void setOuttakeHighBasket(){
+        wrist.setPosition(Constants.WristConstants.highNetOuttake);
+    }
+    public void setSubmersibleIntake(){
+        wrist.setPosition(Constants.WristConstants.submersibleIntake);
+    }
 
 
 

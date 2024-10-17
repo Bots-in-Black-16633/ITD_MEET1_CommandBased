@@ -4,7 +4,9 @@ import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.teamcode.util.ColorfulTelemetry;
 
@@ -15,16 +17,20 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
     public static final int leftMotor = 0;
     public static final int rightMotor = 1;
     public static final int bothMotors = 2;
+    public int lastTarget = 0;
 
     DcMotorEx leftSlider;
     DcMotorEx rightSlider;
+    DigitalChannel touch;
 
     public ExtendoSubsystem(HardwareMap hwMap){
         this.leftSlider = (DcMotorEx) hwMap.dcMotor.get("leftSlider");
         this.rightSlider = (DcMotorEx)hwMap.dcMotor.get("rightSlider");
         this.leftSlider.setDirection(DcMotorSimple.Direction.REVERSE);
+        this.touch = hwMap.digitalChannel.get("touch");
         //set Motor Directions
         resetEncoders();
+
     }
 
     public void setPower(double power, int motorType){
@@ -42,6 +48,7 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
         setPower(power,ExtendoSubsystem.bothMotors);
     }
     public void runToPosition(int encoderCounts, double power,int motorType){
+        lastTarget=encoderCounts;
         leftSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         rightSlider.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         if(motorType==bothMotors||motorType==ExtendoSubsystem.leftMotor){
@@ -92,12 +99,17 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
     public double getRightVelocity(){
         return Math.abs(rightSlider.getVelocity());
     }
+
+    public boolean isSliderAtRest(){
+        return !touch.getState();
+    }
     @Override
     public void printTelemetry(ColorfulTelemetry t) {
         t.addLine();
         t.addLine("____SLIDER_____");
         t.addLine("LEFT SLIDER : " + leftSlider.getCurrentPosition() + " Power: " + leftSlider.getPower() + "VEL" + leftSlider.getVelocity());
         t.addLine("RIGHT SLIDER (FOLLOWER)" + rightSlider.getCurrentPosition() + " Power: " + rightSlider.getPower() + "VEL" + rightSlider.getVelocity());
+        t.addLine("Target is Rest " + touch.getState() );
 
     }
 

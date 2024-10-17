@@ -17,15 +17,20 @@ public class ResetToIntakeCommand extends SequentialCommandGroup {
     public ResetToIntakeCommand(PivotSubsystem pivot, ExtendoSubsystem extendo, WristSubsystem wrist) {
 
         addCommands(
-                new ConditionalCommand(new SequentialCommandGroup(new InstantCommand(wrist::setFacingStraightParallelToSlider),new WaitCommand(1000)),new InstantCommand(wrist::setFacingStraightParallelToSlider),()->extendo.getPosition()> Constants.ExtendoConstants.highBasket-200 && pivot.getPosition() > Constants.PivotConstants.submersibleIntake+200),
+                new ConditionalCommand(
+                        new SequentialCommandGroup(
+                                new InstantCommand(wrist::setFacingStraightParallelToSlider),
+                                new WaitCommand(1000)),
+                        new InstantCommand(wrist::setFacingBelt),
+                        ()->pivot.getPosition() > Constants.PivotConstants.submersibleIntake+200),
 
-                new ConditionalCommand(new PivotRunToCommand(pivot, Constants.PivotConstants.submersibleIntake),new InstantCommand(),()->pivot.getPosition() < Constants.PivotConstants.submersibleIntake),
-                new InstantCommand(wrist::setFacingStraightParallelToSlider),
-                new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.rest), new PivotRunToCommand(pivot, Constants.PivotConstants.rest)
+                new ConditionalCommand(
+                        new PivotRunToCommand(pivot, Constants.PivotConstants.submersibleIntake),
+                        new InstantCommand(),()->pivot.getPosition() < Constants.PivotConstants.submersibleIntake),
+                new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.rest),
+                new PivotRunToCommand(pivot, Constants.PivotConstants.rest)
         );
-        //if inaking from submersible wris back to facing away from belt
-        //if outtakin reset to facing belts
-        //.5 outake position for wrist
+
 
         addRequirements(pivot, extendo, wrist);
     }

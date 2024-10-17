@@ -94,8 +94,8 @@ public class DriveSubsystem extends BIBSubsystemBase  {
             rest();
         });
     }
-    public CommandBase getDriveFieldcentric(DoubleSupplier xPow,DoubleSupplier yPow, DoubleSupplier rotPower){
-        return this.runEnd(()->{driveFieldcentric(xPow.getAsDouble(),yPow.getAsDouble(), rotPower.getAsDouble(),1);}, ()->{
+    public CommandBase getDriveFieldcentric(DoubleSupplier xPow,DoubleSupplier yPow, DoubleSupplier rotPower, double speed){
+        return this.runEnd(()->{driveFieldcentric(xPow.getAsDouble(),yPow.getAsDouble(), rotPower.getAsDouble(),speed);}, ()->{
             rest();
         });
     }

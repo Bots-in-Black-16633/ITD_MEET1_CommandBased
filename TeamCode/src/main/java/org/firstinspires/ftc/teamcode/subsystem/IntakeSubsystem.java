@@ -7,6 +7,9 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.util.ColorfulTelemetry;
 
+import java.util.function.BooleanSupplier;
+import java.util.function.DoubleSupplier;
+
 public class IntakeSubsystem extends BIBSubsystemBase{
 
     public CRServo intake;
@@ -19,37 +22,29 @@ public class IntakeSubsystem extends BIBSubsystemBase{
     void printTelemetry(ColorfulTelemetry t) {
 
     }
+    public void intake(double power){
+        intake.setPower(power);
 
-    public void toggleIntakeRest(){
-        if(intakeState==0){intakeState = 1;intake();}
-            else {intakeState = 0;rest();}
+       ;
     }
-    public void toggleOuttakeRest(){
-        if(intakeState==0){intakeState = 2;outtake();}
-        else {intakeState = 0;rest();}
-    }
-
-    public void intake(){
-        intake.setPower(1);
-    }
-    public void outtake(){
-        intake.setPower(-1);
+    public void outtake(double power){
+        intake.setPower(-power);
     }
     public void rest(){
         intake.setPower(0);
     }
 
 
-public CommandBase getIntakeCommand(){
+public CommandBase getIntakeCommand(BooleanSupplier goFast){
         return this.runEnd(()->{
-            intake();
+            intake(goFast.getAsBoolean()?.5:1);
         },()->{
             rest();
         });
 }
-    public CommandBase getOuttakeCommand(){
+    public CommandBase getOuttakeCommand(BooleanSupplier goFast){
         return this.runEnd(()->{
-            outtake();
+            outtake(goFast.getAsBoolean()?1:.25);
         },()->{
             rest();
         });
