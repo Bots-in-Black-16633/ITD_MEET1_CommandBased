@@ -100,6 +100,12 @@ public class DriveSubsystem extends BIBSubsystemBase  {
         });
     }
 
+    public CommandBase getDriveFieldcentricSlow(DoubleSupplier xPow,DoubleSupplier yPow, DoubleSupplier rotPower, double multiplier){
+        return this.runEnd(()->{driveFieldcentric(xPow.getAsDouble(),yPow.getAsDouble(), rotPower.getAsDouble(),multiplier);}, ()->{
+            rest();
+        });
+    }
+
     //Methods that pass through Mecanum drive class
     public TrajectoryActionBuilder actionBuilder(Pose2d startPose) {
         return drive.actionBuilder(startPose);
