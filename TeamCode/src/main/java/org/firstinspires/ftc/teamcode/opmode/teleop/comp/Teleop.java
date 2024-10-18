@@ -35,6 +35,10 @@ public class Teleop extends SampleCommandTeleop {
         new Trigger(()->robot.extendo.isSliderAtRest()).whenActive(new InstantCommand(robot.extendo::resetEncoders));
 
 
+        new Trigger(()->g2.getButton(GamepadKeys.Button.START) && g2.getButton(GamepadKeys.Button.LEFT_BUMPER)).whenActive(new InstantCommand(robot.pivot::resetEncoders));
+        new Trigger(()->g2.getButton(GamepadKeys.Button.START) && g2.getButton(GamepadKeys.Button.RIGHT_BUMPER)).whenActive(new InstantCommand(robot.extendo::resetEncoders));
+
+        //g2.getGamepadButton(GamepadKeys.Button.START).whenActive(new InstantCommand(robot.extendo::resetEncoders));
 
 
 
@@ -46,7 +50,6 @@ public class Teleop extends SampleCommandTeleop {
         g2.getGamepadButton(GamepadKeys.Button.Y).whenActive(new ResetToIntakeCommand(robot.pivot,robot.extendo,robot.wrist));
         g2.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenActive(new HighBasketDeposit(robot.pivot,robot.extendo,robot.wrist));
         g2.getGamepadButton(GamepadKeys.Button.A).whenActive(new SubmersibleIntakeCommand(robot.pivot,robot.extendo,robot.wrist));
-        g2.getGamepadButton(GamepadKeys.Button.START).whenActive(new InstantCommand(robot.extendo::resetEncoders));
         g2.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenActive(new LowBasketDeposit(robot.pivot,robot.extendo,robot.wrist));
         g2.getGamepadButton(GamepadKeys.Button.X).whenActive(new ClimbCommand(robot.pivot,robot.extendo,robot.wrist));
         //g2.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenActive(new DeliverHighSpecimen(robot.pivot,robot.extendo,robot.wrist));

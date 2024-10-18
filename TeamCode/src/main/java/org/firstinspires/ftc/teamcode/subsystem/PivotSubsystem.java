@@ -56,6 +56,8 @@ public class PivotSubsystem extends BIBSubsystemBase{
     }
 
     public void resetEncoders(int motorType){
+        leftPivot.setPower(0);
+        rightPivot.setPower(0);
         if(motorType==bothMotors||motorType==PivotSubsystem.leftMotor){
             leftPivot.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             leftPivot.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -67,6 +69,7 @@ public class PivotSubsystem extends BIBSubsystemBase{
             rightPivot.setTargetPosition(0);
         }
     }
+
     public void resetEncoders(){
         resetEncoders(PivotSubsystem.bothMotors);
     }
