@@ -118,9 +118,17 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
 
     }
 
-    public CommandBase getExtendoPowerCommand(DoubleSupplier sliderPower, BooleanSupplier increaseSpeed){
+    public CommandBase getExtendoPowerCommand(DoubleSupplier sliderPower, BooleanSupplier increaseSpeed, DoubleSupplier pivotpos){
         return this.runEnd(()->{
-            setPower((increaseSpeed.getAsBoolean()?3:1)*sliderPower.getAsDouble()*.25);
+            if (sliderPower.getAsDouble() > 0 && pivotpos.getAsDouble() < 600 &&getPosition() > 2000) {
+                setPower(0);
+
+            }
+            else{
+                setPower((increaseSpeed.getAsBoolean()?3:1)*sliderPower.getAsDouble()*.25);
+
+            }
+
         },()->{
             runToPosition(getPosition(), .5);
         });

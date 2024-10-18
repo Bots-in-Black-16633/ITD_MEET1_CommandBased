@@ -80,7 +80,7 @@ public class BaseRobot extends BIBSubsystemBase {
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
             wrist.setFacingStraightParallelToSlider();
             extendo.runToPosition(Constants.ExtendoConstants.rest, 1);
-            AutoUtil.delay(1.5);
+            AutoUtil.delay(3);
             pivot.runToPosition(Constants.PivotConstants.rest, .3);
             AutoUtil.delay(2);
             wrist.setFacingOppositeBelts();
