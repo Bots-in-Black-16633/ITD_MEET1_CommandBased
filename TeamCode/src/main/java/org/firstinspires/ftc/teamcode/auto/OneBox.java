@@ -28,9 +28,9 @@ public class OneBox extends SampleAuto {
         Actions.runBlocking((t) -> {robot.intake.rest();return false;});
         Actions.runBlocking(robot.getResetToIntakeAction());
         Actions.runBlocking(AutoUtil.getDelayAction(1));
-        Actions.runBlocking ((t) -> {robot.intake.intake(1);return false;});
-        Actions.runBlocking(robot.autoGenerator.getNetToBoxThreeAndBack());
-        robot.drive.updatePoseEstimate();
+//        Actions.runBlocking ((t) -> {robot.intake.intake(1);return false;});
+//        Actions.runBlocking(robot.autoGenerator.getNetToBoxThree());
+//        robot.drive.updatePoseEstimate();
     }
 
     @Override

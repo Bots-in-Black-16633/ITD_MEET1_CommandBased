@@ -39,11 +39,10 @@ public class AutoUtil {
                 }
         }
 
-        public Action getNetToBoxThreeAndBack() {
+        public Action getNetToBoxThree() {
                 return drive.actionBuilder(drive.getPose())
                         .strafeToConstantHeading(new Vector2d(-72, -42))
                         .strafeToConstantHeading(new Vector2d(-72, -33))
-                        .strafeToConstantHeading(new Vector2d(-73, -45))
                         .build();
         }
 

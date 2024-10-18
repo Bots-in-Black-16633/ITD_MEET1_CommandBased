@@ -20,7 +20,7 @@ public class ResetToIntakeCommand extends SequentialCommandGroup {
                 new ConditionalCommand(
                         new SequentialCommandGroup(
                                 new InstantCommand(wrist::setFacingStraightParallelToSlider),
-                                new WaitCommand(1000)),
+                                new WaitCommand(400)),
                         new InstantCommand(wrist::setFacingBelt),
                         ()->pivot.getPosition() > Constants.PivotConstants.submersibleIntake+200),
 
