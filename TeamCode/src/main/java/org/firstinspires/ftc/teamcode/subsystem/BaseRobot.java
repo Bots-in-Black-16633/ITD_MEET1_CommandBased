@@ -1,10 +1,15 @@
 package org.firstinspires.ftc.teamcode.subsystem;
 
+import androidx.annotation.NonNull;
+
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
+import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.teamcode.auto.util.AutoUtil;
 import org.firstinspires.ftc.teamcode.util.ColorfulTelemetry;
+import org.firstinspires.ftc.teamcode.util.Constants;
 
 public class BaseRobot extends BIBSubsystemBase {
 
@@ -43,5 +48,51 @@ public class BaseRobot extends BIBSubsystemBase {
         wrist.periodic();
         intake.periodic();
 
+    }
+
+    class HighBasketOuttakeAction implements Action {
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+
+            pivot.runToPosition(Constants.PivotConstants.vertical, 1);
+//            while(pivot.getPosition()<Constants.PivotConstants.vertical) {
+//
+//            }
+
+
+            wrist.setFacingStraightParallelToSlider();
+            AutoUtil.delay(1.5);
+            extendo.runToPosition(Constants.ExtendoConstants.highBasket, 1);
+//            while(extendo.getPosition()<Constants.ExtendoConstants.highBasket) {
+//
+//            }
+            AutoUtil.delay(1.5);
+            wrist.setOuttakeHighBasket();
+
+            return false;
+        }
+    }
+
+    class ResetToIntakeAction implements Action {
+
+        @Override
+        public boolean run(@NonNull TelemetryPacket telemetryPacket) {
+            wrist.setFacingStraightParallelToSlider();
+            extendo.runToPosition(Constants.ExtendoConstants.rest, 1);
+            AutoUtil.delay(1.5);
+            pivot.runToPosition(Constants.PivotConstants.rest, .3);
+            AutoUtil.delay(2);
+            wrist.setFacingOppositeBelts();
+            return false;
+        }
+    }
+
+    public HighBasketOuttakeAction getHighBasketOuttakeAction() {
+        return new HighBasketOuttakeAction();
+    }
+
+    public ResetToIntakeAction getResetToIntakeAction() {
+        return new ResetToIntakeAction();
     }
 }

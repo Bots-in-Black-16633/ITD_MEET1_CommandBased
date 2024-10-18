@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode.auto.util;
 import com.acmerobotics.roadrunner.Action;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.subsystem.DriveSubsystem;
 
@@ -28,13 +29,34 @@ public class AutoUtil {
         public Action getStartToNetAction(int start) {
                 if(start==NET) {
                         return drive.actionBuilder(NETSTART)
-                                .strafeToLinearHeading(new Vector2d(-57,-56), Math.toRadians(45))
+                                .strafeToConstantHeading(new Vector2d(-75,-44))
                                 .build();
                 }
                 else {
                         return drive.actionBuilder(OBSSTART)
-                                .strafeToLinearHeading(new Vector2d(-57,-56), Math.toRadians(45))
+                                .strafeToLinearHeading(new Vector2d(-57,-56), Math.toRadians(90))
                                 .build();
                 }
         }
+
+        public Action getNetToBoxThreeAndBack() {
+                return drive.actionBuilder(drive.getPose())
+                        .strafeToConstantHeading(new Vector2d(-72, -42))
+                        .strafeToConstantHeading(new Vector2d(-72, -33))
+                        .strafeToConstantHeading(new Vector2d(-73, -45))
+                        .build();
+        }
+
+
+
+        public static void delay(double t) {
+                ElapsedTime runtime = new ElapsedTime();
+                runtime.reset();
+                while (runtime.seconds() < t) {
+                }
+        }
+        public static Action getDelayAction(double t) {
+                return (q) -> {delay(t); return false;};
+        }
+
 }
