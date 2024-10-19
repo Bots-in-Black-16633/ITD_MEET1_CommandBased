@@ -7,8 +7,8 @@ import org.firstinspires.ftc.teamcode.auto.util.AutoUtil;
 import org.firstinspires.ftc.teamcode.subsystem.BaseRobot;
 import org.firstinspires.ftc.teamcode.util.SampleAuto;
 
-@Autonomous(name="NPL")
-public class OneBox extends SampleAuto {
+@Autonomous(name="OPL")
+public class OStartOneBox extends SampleAuto {
     BaseRobot robot;
 
     @Override
@@ -18,7 +18,7 @@ public class OneBox extends SampleAuto {
 
     @Override
     public void onStart() {
-        Actions.runBlocking(robot.autoGenerator.getStartToNetAction(AutoUtil.NET));
+        Actions.runBlocking(robot.autoGenerator.getStartToNetAction(AutoUtil.OBS));
         robot.drive.updatePoseEstimate();
         Actions.runBlocking(robot.getHighBasketOuttakeAction());
         Actions.runBlocking(AutoUtil.getDelayAction(1));

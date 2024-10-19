@@ -29,15 +29,22 @@ public class AutoUtil {
         public Action getStartToNetAction(int start) {
                 if(start==NET) {
                         return drive.actionBuilder(NETSTART)
-                                .strafeToConstantHeading(new Vector2d(-75,-44))
+                                .strafeToConstantHeading(new Vector2d(-75,-46))
                                 .build();
                 }
                 else {
                         return drive.actionBuilder(OBSSTART)
-                                .strafeToLinearHeading(new Vector2d(-57,-56), Math.toRadians(90))
+                                .strafeToLinearHeading(new Vector2d(-75,-46), Math.toRadians(90))
                                 .build();
                 }
         }
+
+        public Action getBackupAction(Pose2d pose) {
+                return drive.actionBuilder(pose)
+                        .strafeToConstantHeading(new Vector2d(-75, -40))
+                        .build();
+        }
+
 
         public Action getNetToBoxThree() {
                 return drive.actionBuilder(drive.getPose())

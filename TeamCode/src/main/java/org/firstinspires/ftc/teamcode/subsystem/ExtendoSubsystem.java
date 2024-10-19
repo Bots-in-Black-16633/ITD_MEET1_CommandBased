@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.TouchSensor;
 
 import org.firstinspires.ftc.teamcode.util.ColorfulTelemetry;
+import org.firstinspires.ftc.teamcode.util.Constants;
 
 import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
@@ -132,6 +133,21 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
 
             }
 
+        },()->{
+            runToPosition(getPosition(), .5);
+        });
+    }
+
+
+    //TODO: Change out highBasket for a tuned value on lines 135 and 134. Also test out my dubious math.
+    public CommandBase getSafetyExtendoPowerCommand(DoubleSupplier sliderPower, BooleanSupplier increaseSpeed, DoubleSupplier pivotAngle){
+        return this.runEnd(()->{
+            if(Math.cos(Math.toRadians(pivotAngle.getAsDouble()* Constants.PivotConstants.degreesPerTick))>Constants.ExtendoConstants.highBasket) {
+                runToPosition(Constants.ExtendoConstants.highBasket-200, .5);
+            }
+            else {
+                setPower((increaseSpeed.getAsBoolean()?3:1)*sliderPower.getAsDouble()*.25);
+            }
         },()->{
             runToPosition(getPosition(), .5);
         });

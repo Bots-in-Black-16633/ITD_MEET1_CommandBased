@@ -16,6 +16,7 @@ public final class Constants {
         public static final int lowDelivery = 811;
         public static final int highSpecimenDelivery = 1030;
 
+        public static final double degreesPerTick = 90/vertical;
 
         public static final int rest = 0;
     }
