@@ -120,6 +120,9 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
 
     public CommandBase getExtendoPowerCommand(DoubleSupplier sliderPower, BooleanSupplier increaseSpeed, DoubleSupplier pivotpos){
         return this.runEnd(()->{
+            //if slider is trying to go forward and the pivot is below a certain poaisition, and the slider is extended to a certain
+            // psition already
+            //than limit the extension
             if (sliderPower.getAsDouble() > 0 && pivotpos.getAsDouble() < 600 &&getPosition() > 2000) {
                 setPower(0);
 
