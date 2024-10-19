@@ -132,7 +132,7 @@ public class ExtendoSubsystem extends BIBSubsystemBase{
     public CommandBase getSafetyExtendoPowerCommand(DoubleSupplier sliderPower, BooleanSupplier increaseSpeed, DoubleSupplier pivotAngle){
         return this.runEnd(()->{
             if(Math.cos(Math.toRadians(pivotAngle.getAsDouble()* Constants.PivotConstants.degreesPerTick))>Constants.ExtendoConstants.highBasket) {
-                runToPosition(Constants.ExtendoConstants.highBasket, .5);
+                runToPosition(Constants.ExtendoConstants.highBasket-200, .5);
             }
             else {
                 setPower((increaseSpeed.getAsBoolean()?3:1)*sliderPower.getAsDouble()*.25);
