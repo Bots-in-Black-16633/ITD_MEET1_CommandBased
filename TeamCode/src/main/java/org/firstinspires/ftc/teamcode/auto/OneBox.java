@@ -26,10 +26,18 @@ public class OneBox extends SampleAuto {
         Actions.runBlocking(AutoUtil.getDelayAction(1.5));
         robot.drive.updatePoseEstimate();
         Actions.runBlocking((t) -> {robot.intake.rest();return false;});
-        Actions.runBlocking(robot.autoGenerator.getBackupAction(robot.drive.getPose()));
-        robot.drive.updatePoseEstimate();
+
         Actions.runBlocking(robot.getResetToIntakeAction());
         Actions.runBlocking(AutoUtil.getDelayAction(1));
+
+        Actions.runBlocking((t) -> {robot.intake.intake(1);return false;});
+        Actions.runBlocking(robot.autoGenerator.getNetToBoxThree(robot.drive.getPose()));
+        robot.drive.updatePoseEstimate();
+        Actions.runBlocking(AutoUtil.getDelayAction(1));
+        Actions.runBlocking(robot.autoGenerator.getBackupToDepositAction(robot.drive.getPose()));
+        robot.drive.updatePoseEstimate();
+        Actions.runBlocking((t) -> {robot.intake.rest();return false;});
+
 
     }
 

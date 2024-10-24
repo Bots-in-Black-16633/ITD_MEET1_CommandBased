@@ -14,6 +14,7 @@ public class AutoUtil {
         //Observation side start(farm from baskets)
         public static final int OBS = 1;
 
+        public static final Vector2d highBasketDeposit = new Vector2d(-60, -48);
 
         //Starting Pose2d from the net side
         public static final Pose2d NETSTART = new Pose2d(new Vector2d(-36, -63), Math.toRadians(90));
@@ -29,7 +30,7 @@ public class AutoUtil {
         public Action getStartToNetAction(int start) {
                 if(start==NET) {
                         return drive.actionBuilder(NETSTART)
-                                .strafeToConstantHeading(new Vector2d(-75,-46))
+                                .strafeToLinearHeading(highBasketDeposit, Math.toRadians(45))
                                 .build();
                 }
                 else {
@@ -39,17 +40,16 @@ public class AutoUtil {
                 }
         }
 
-        public Action getBackupAction(Pose2d pose) {
+        public Action getBackupToDepositAction(Pose2d pose) {
                 return drive.actionBuilder(pose)
-                        .strafeToConstantHeading(new Vector2d(-75, -40))
+                        .strafeToLinearHeading(highBasketDeposit, Math.toRadians(45))
                         .build();
         }
 
 
-        public Action getNetToBoxThree() {
-                return drive.actionBuilder(drive.getPose())
-                        .strafeToConstantHeading(new Vector2d(-72, -42))
-                        .strafeToConstantHeading(new Vector2d(-72, -33))
+        public Action getNetToBoxThree(Pose2d pose) {
+                return drive.actionBuilder(pose)
+                        .strafeToLinearHeading(new Vector2d(-55, -36), Math.toRadians(90))
                         .build();
         }
 

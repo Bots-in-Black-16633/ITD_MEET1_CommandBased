@@ -29,6 +29,9 @@ public class WristSubsystem extends BIBSubsystemBase{
     public void setFacingStraightParallelToSlider(){
         wrist.setPosition(Constants.WristConstants.facingStraightParallel);
     }
+    public void setAutoIntake(){
+        wrist.setPosition(Constants.WristConstants.autoIntake);
+    }
     public void setFacingOppositeBelts(){
         wrist.setPosition(Constants.WristConstants.facingOppositeBelts);
     }

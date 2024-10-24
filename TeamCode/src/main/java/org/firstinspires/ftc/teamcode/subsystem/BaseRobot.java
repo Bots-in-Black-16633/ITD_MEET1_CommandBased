@@ -59,7 +59,7 @@ public class BaseRobot extends BIBSubsystemBase {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
 
-            pivot.runToPosition(Constants.PivotConstants.vertical, 1);
+            pivot.runToPosition(Constants.PivotConstants.verticalAuto, 1);
 //            while(pivot.getPosition()<Constants.PivotConstants.vertical) {
 //
 //            }
@@ -83,11 +83,14 @@ public class BaseRobot extends BIBSubsystemBase {
         @Override
         public boolean run(@NonNull TelemetryPacket telemetryPacket) {
             wrist.setFacingStraightParallelToSlider();
-            extendo.runToPosition(Constants.ExtendoConstants.rest, 1);
-            AutoUtil.delay(3);
+            AutoUtil.delay(1);
+
             pivot.runToPosition(Constants.PivotConstants.rest, .3);
+            AutoUtil.delay(.25);
+            extendo.runToPosition(Constants.ExtendoConstants.rest, 1);
+
             AutoUtil.delay(2);
-            wrist.setFacingOppositeBelts();
+            wrist.setAutoIntake();
             return false;
         }
     }
