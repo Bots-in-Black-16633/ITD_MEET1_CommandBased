@@ -74,7 +74,6 @@ public class DriveSubsystem extends BIBSubsystemBase  {
         t.addLine("IMU (RAW) " + drive.lazyImu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.DEGREES));
         t.addLine("IMU (Modified) " + Math.toDegrees(drive.getHeading()));//modified with intial heading and
         t.addLine("Initial Heading" + drive.initialHeading);
-        t.addLine("Offset Heading" + drive.headingOffset);
         t.addLine();
         t.addLine("ODO");
         t.addLine("position x" + drive.pose.position.x);

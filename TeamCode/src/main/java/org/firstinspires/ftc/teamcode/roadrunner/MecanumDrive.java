@@ -206,7 +206,6 @@ public final class MecanumDrive {
         }
     }
     public double initialHeading = 0;
-    public double headingOffset =90;//indegrees
 
     public MecanumDrive(HardwareMap hardwareMap, Pose2d pose) {
         this.pose = pose;
@@ -239,8 +238,10 @@ public final class MecanumDrive {
         lazyImu = new LazyImu(hardwareMap, "imu", new RevHubOrientationOnRobot(
                 PARAMS.logoFacingDirection, PARAMS.usbFacingDirection));
 
-        resetImu();
+        //reset absolute imut position
+        resetImuAbsolute();
 
+        //reset initial heading value
         initialHeading = Math.toDegrees(pose.heading.log());
 
         voltageSensor = hardwareMap.voltageSensor.iterator().next();
@@ -451,6 +452,7 @@ public final class MecanumDrive {
     public PoseVelocity2d updatePoseEstimate() {
         Twist2dDual<Time> twist = localizer.update();
         pose = pose.plus(twist.value());
+        //pass in imu heading
         pose = new Pose2d(pose.position,getHeading());
 
         poseHistory.add(pose);
@@ -496,9 +498,17 @@ public final class MecanumDrive {
         );
     }
     public double getHeading(){
-        return lazyImu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS)+Math.toRadians(initialHeading)+Math.toRadians(headingOffset);
+        return lazyImu.get().getRobotYawPitchRollAngles().getYaw(AngleUnit.RADIANS)+Math.toRadians(initialHeading);
     }
-    public void resetImu(){
+    public void resetHeadingRelative(double setFrontOfRobotToFacingHeading){
+        resetImuAbsolute();
+        initialHeading = setFrontOfRobotToFacingHeading;
+    }
+    public void resetHeadingRelative(){
+        resetHeadingRelative(0);
+    }
+
+    public void resetImuAbsolute(){
         lazyImu.get().resetYaw();
     }
 
