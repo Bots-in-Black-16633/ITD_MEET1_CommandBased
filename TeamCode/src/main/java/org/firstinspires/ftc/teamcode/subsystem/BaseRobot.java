@@ -19,6 +19,7 @@ public class BaseRobot extends BIBSubsystemBase {
     public WristSubsystem wrist;
     public IntakeSubsystem intake;
     public AutoUtil autoGenerator;
+    public SpecimenClaw specimenClaw;
 
     public BaseRobot(HardwareMap hwMap, Pose2d startPos){
         drive = new DriveSubsystem(hwMap, startPos);
@@ -26,6 +27,7 @@ public class BaseRobot extends BIBSubsystemBase {
         extendo = new ExtendoSubsystem(hwMap);
         wrist = new WristSubsystem(hwMap);
         intake = new IntakeSubsystem(hwMap);
+        specimenClaw = new SpecimenClaw(hwMap);
         autoGenerator = new AutoUtil(drive);
     }
 
@@ -47,6 +49,8 @@ public class BaseRobot extends BIBSubsystemBase {
         extendo.periodic();
         wrist.periodic();
         intake.periodic();
+        specimenClaw.periodic();
+
 
     }
 

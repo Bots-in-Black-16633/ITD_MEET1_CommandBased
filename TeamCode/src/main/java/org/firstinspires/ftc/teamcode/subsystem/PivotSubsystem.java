@@ -20,7 +20,7 @@ public class PivotSubsystem extends BIBSubsystemBase{
     public PivotSubsystem(HardwareMap hwMap){
         rightPivot = hwMap.dcMotor.get("rightPivot");
         leftPivot = hwMap.dcMotor.get("leftPivot");
-        leftPivot.setDirection(DcMotorSimple.Direction.REVERSE);
+        rightPivot.setDirection(DcMotorSimple.Direction.REVERSE);
         //reverse any motor directions
         resetEncoders();
     }

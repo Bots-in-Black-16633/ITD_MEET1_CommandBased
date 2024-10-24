@@ -52,8 +52,9 @@ public class Teleop extends SampleCommandTeleop {
         g2.getGamepadButton(GamepadKeys.Button.A).whenActive(new SubmersibleIntakeCommand(robot.pivot,robot.extendo,robot.wrist));
         g2.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenActive(new LowBasketDeposit(robot.pivot,robot.extendo,robot.wrist));
         g2.getGamepadButton(GamepadKeys.Button.X).whenActive(new ClimbCommand(robot.pivot,robot.extendo,robot.wrist));
-        //g2.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenActive(new DeliverHighSpecimen(robot.pivot,robot.extendo,robot.wrist));
-        //g2.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenActive(new DeliverLowSpecimen(robot.pivot,robot.extendo,robot.wrist));
+        g2.getGamepadButton(GamepadKeys.Button.B).toggleWhenPressed(robot.specimenClaw::open, robot.specimenClaw::close);
+        g2.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenActive(new getSpecimenFromWall(robot.pivot,robot.extendo,robot.wrist, robot.specimenClaw));
+        g2.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenActive(new DeliverHighSpecimen(robot.pivot,robot.extendo,robot.wrist));
 
     }
 

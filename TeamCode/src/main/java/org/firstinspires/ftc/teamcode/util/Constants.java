@@ -12,9 +12,9 @@ public final class Constants {
     public static final class PivotConstants{
         public static final int submersibleIntake = 150;
         public static final int vertical = 1300;
-        public static final int wallPickup = 540;
-        public static final int lowDelivery = 811;
-        public static final int highSpecimenDelivery = 1030;
+        public static final int wallPickup = 1381;
+        public static final int lowDelivery = 1270;
+        public static final int highSpecimenDelivery = 1383;
 
         public static final double degreesPerTick = 90/vertical;
 
@@ -35,7 +35,10 @@ public final class Constants {
         public static final int zone1Climb = 1000;
         public static final int zone2Climb = 2000;
         public static final int rest = 0;
-        public static final int highSpecimenDelivery = 1390;
+        public static final int highSpecimenDelivery = 2300;
+        public static final int lowSpecimenDelivery = 900;
+
+        public static final int wallSpecimenPickup = 370;
 
     }
 
@@ -82,6 +85,11 @@ public final class Constants {
         public static double round(double in, int places){
             return ((int)(in * Math.pow(10,places)))/(double)Math.pow(10,places);
         }
+    }
+
+    public static class SpecimenClawConsants{
+        public static int open = 0;
+        public static double close = .23;
     }
 
 }
