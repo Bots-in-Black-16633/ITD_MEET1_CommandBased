@@ -240,6 +240,7 @@ public final class MecanumDrive {
                 PARAMS.logoFacingDirection, PARAMS.usbFacingDirection));
 
         resetImu();
+
         initialHeading = Math.toDegrees(pose.heading.log());
 
         voltageSensor = hardwareMap.voltageSensor.iterator().next();
@@ -450,6 +451,7 @@ public final class MecanumDrive {
     public PoseVelocity2d updatePoseEstimate() {
         Twist2dDual<Time> twist = localizer.update();
         pose = pose.plus(twist.value());
+        pose = new Pose2d(pose.position,getHeading());
 
         poseHistory.add(pose);
         while (poseHistory.size() > 100) {
