@@ -11,10 +11,11 @@ public final class Constants {
 
     public static final class PivotConstants{
         public static final int submersibleIntake = 150;
-        public static final int vertical = 1300;
         public static final int wallPickup = 1381;
         public static final int lowDelivery = 1270;
         public static final int highSpecimenDelivery = 1383;
+        public static final int vertical = 1646;
+
 
         public static final double degreesPerTick = 90/vertical;
 
