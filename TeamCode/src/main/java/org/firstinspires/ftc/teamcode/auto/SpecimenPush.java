@@ -70,9 +70,22 @@ public class SpecimenPush extends SampleAuto {
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
                 .strafeToLinearHeading(new Vector2d(60, -50), Math.toRadians(90))
                 .strafeToConstantHeading(new Vector2d(60, -65)));
-
+        robot.drive.updatePoseEstimate();
         Actions.runBlocking(AutoUtil.getDelayAction(1));
         Actions.runBlocking((t) -> {robot.specimenClaw.close();return false;});
+        Actions.runBlocking((t) -> {robot.extendo.runToPosition(Constants.ExtendoConstants.highClip, 1);return false;});
+        Actions.runBlocking(AutoUtil.getDelayAction(1));
+        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
+                .strafeToConstantHeading(new Vector2d(60, -50))
+                .strafeToLinearHeading(new Vector2d(0, -50), Math.toRadians(270))
+                .strafeToConstantHeading(new Vector2d(0, -32))
+                .build());
+        robot.drive.updatePoseEstimate();
+        Actions.runBlocking((t) -> {robot.extendo.runToPosition(Constants.ExtendoConstants.highClipDeposit, 1); return false;});
+        Actions.runBlocking((t) -> {robot.specimenClaw.open(); return false;});
+        Actions.runBlocking((t) -> {robot.extendo.runToPosition(Constants.ExtendoConstants.rest, .5); return false;});
+        Actions.runBlocking((t) -> {robot.pivot.runToPosition(Constants.PivotConstants.rest, .5);return false;});
+
 
 
 
