@@ -1,21 +1,22 @@
-package org.firstinspires.ftc.teamcode.auto.util;
+package org.firstinspires.ftc.teamcode.auto;
 
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
+import org.firstinspires.ftc.teamcode.auto.util.AutoUtil;
 import org.firstinspires.ftc.teamcode.subsystem.BaseRobot;
 import org.firstinspires.ftc.teamcode.util.Constants;
 import org.firstinspires.ftc.teamcode.util.SampleAuto;
 
-@Autonomous(name="SpecimenHighBasket")
-public class SpecimenHighBasket extends SampleAuto {
+@Autonomous(name="SpecimenPush")
+public class SpecimenPush extends SampleAuto {
     BaseRobot robot;
 
     @Override
     public void onInit() {
-        robot = new BaseRobot(hardwareMap, new Pose2d(-36, -63, Math.toRadians(270)));
+        robot = new BaseRobot(hardwareMap, new Pose2d(12, -63, Math.toRadians(270)));
     }
 
     @Override
@@ -44,17 +45,36 @@ public class SpecimenHighBasket extends SampleAuto {
         Actions.runBlocking((t) -> {robot.pivot.runToPosition(Constants.PivotConstants.rest, .5);return false;});
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .strafeToLinearHeading(new Vector2d(0, -75), Math.toRadians(135))
+                .strafeToConstantHeading(new Vector2d(0, -58))
                 .build());
         robot.drive.updatePoseEstimate();
         Actions.runBlocking(AutoUtil.getDelayAction(1.5));
 
-        Actions.runBlocking((t) -> {robot.intake.intake(1);return false;});
-        Actions.runBlocking((t) -> {robot.wrist.setAutoIntake();return false;});
+        Actions.runBlocking((t) -> {robot.wrist.setFacingBelt();return false;});
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .strafeToConstantHeading(new Vector2d(-36, -24))
+                .strafeToConstantHeading(new Vector2d(36, -58))
+                .strafeToConstantHeading(new Vector2d(36, -12))
+                .strafeToConstantHeading(new Vector2d(48, -12))
+                .strafeToConstantHeading(new Vector2d(48, -54))
+                        .strafeToConstantHeading(new Vector2d(48, -12))
+                        .strafeToConstantHeading(new Vector2d(60, -12))
+                        .strafeToConstantHeading(new Vector2d(60, -54))
+                        .strafeToConstantHeading(new Vector2d(60, -12))
+
                 .build());
+        robot.drive.updatePoseEstimate();
+        Actions.runBlocking((t) -> {robot.pivot.runToPosition(Constants.PivotConstants.wallPickup, 1);return false;});
+        Actions.runBlocking((t) -> {robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup, 1);return false;});
+        Actions.runBlocking((t) -> {robot.wrist.setFacingStraightParallelToSlider();return false;});
+        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
+                .strafeToLinearHeading(new Vector2d(60, -50), Math.toRadians(90))
+                .strafeToConstantHeading(new Vector2d(60, -65)));
+
+        Actions.runBlocking(AutoUtil.getDelayAction(1));
+        Actions.runBlocking((t) -> {robot.specimenClaw.close();return false;});
+
+
 
 
 
