@@ -35,7 +35,7 @@ public final class Constants {
         public static final int highBasket = 3100;//tuned
         public static final int lowClip = 1000;
 
-        public static final int highClipDeposit = 1700;
+        public static final int highClipDeposit = 1750;
         public static final int zone1Climb = 1000;
         public static final int zone2Climb = 2000;
         public static final int rest = 0;

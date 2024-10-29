@@ -87,8 +87,8 @@ public class DoubleSpecimen extends SampleAuto {
                             robot.wrist.setFacingBelt();
                             return false;
                         })
-                .strafeToConstantHeading(new Vector2d(36, -58))
-                .strafeToConstantHeading(new Vector2d(36, -12))
+                .strafeToConstantHeading(new Vector2d(38, -58))
+                .strafeToConstantHeading(new Vector2d(38, -12))
                 .strafeToConstantHeading(new Vector2d(48, -12))
                 .strafeToConstantHeading(new Vector2d(48, -54))
                 .strafeToConstantHeading(new Vector2d(48, -12))
