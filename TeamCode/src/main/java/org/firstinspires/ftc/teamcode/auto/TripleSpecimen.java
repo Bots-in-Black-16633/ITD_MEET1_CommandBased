@@ -126,6 +126,7 @@ public class TripleSpecimen extends SampleAuto {
         Actions.runBlocking((t) -> {robot.pivot.runToPosition(Constants.PivotConstants.rest, .5); return false;});
         Actions.runBlocking((t) -> {robot.extendo.runToPosition(Constants.ExtendoConstants.rest, 1); return false;});
         Actions.runBlocking(AutoUtil.getDelayAction(2));
+        //
     }
 
     @Override
