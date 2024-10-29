@@ -14,7 +14,6 @@ public class DeliverHighSpecimen extends SequentialCommandGroup {
     public DeliverHighSpecimen(PivotSubsystem pivot, ExtendoSubsystem extendo, WristSubsystem wrist){
 
         addCommands(
-                new ResetToIntakeCommand(pivot,extendo,wrist),
                 new PivotRunToCommand(pivot, Constants.PivotConstants.highSpecimenDelivery),
                 new InstantCommand(wrist::setFacingOppositeBelts),
         new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.highSpecimenDelivery)

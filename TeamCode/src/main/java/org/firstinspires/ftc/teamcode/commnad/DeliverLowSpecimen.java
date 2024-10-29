@@ -13,7 +13,6 @@ public class DeliverLowSpecimen extends SequentialCommandGroup {
     public DeliverLowSpecimen(PivotSubsystem pivot, ExtendoSubsystem extendo, WristSubsystem wrist){
 
         addCommands(
-                new ResetToIntakeCommand(pivot,extendo,wrist),
 
                 new PivotRunToCommand(pivot, Constants.PivotConstants.lowDelivery),
                 new InstantCommand(wrist::setFacingOppositeBelts),

@@ -4,6 +4,7 @@ import com.arcrobotics.ftclib.command.SubsystemBase;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 
+import org.firstinspires.ftc.teamcode.util.ColorfulTelemetry;
 import org.firstinspires.ftc.teamcode.util.Constants;
 
 public class SpecimenClaw extends SubsystemBase {
@@ -18,5 +19,9 @@ public class SpecimenClaw extends SubsystemBase {
     }public void close(){
         s.setPosition(Constants.SpecimenClawConsants.close);
     }
-
+    void printTelemetry(ColorfulTelemetry t) {
+        t.addLine();
+        t.addLine("SPECIMEN SUBSYSTEM");
+        t.addLine("position"+s.getPosition());
+    }
 }

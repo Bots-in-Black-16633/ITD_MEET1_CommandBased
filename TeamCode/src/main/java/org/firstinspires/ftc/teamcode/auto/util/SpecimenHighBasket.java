@@ -29,7 +29,7 @@ public class SpecimenHighBasket extends SampleAuto {
         Actions.runBlocking((t) -> {robot.pivot.runToPosition(Constants.PivotConstants.highSpecimenDelivery, .5);return false;});
         Actions.runBlocking(AutoUtil.getDelayAction(2));
         Actions.runBlocking((t) ->{robot.wrist.setFacingStraightParallelToSlider();return false;});
-        Actions.runBlocking((t) -> {robot.extendo.runToPosition(Constants.ExtendoConstants.highClip, 1);return false;});
+        Actions.runBlocking((t) -> {robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery, 1);return false;});
         Actions.runBlocking(AutoUtil.getDelayAction(2));
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
                 .strafeToConstantHeading(new Vector2d(0, -32))
