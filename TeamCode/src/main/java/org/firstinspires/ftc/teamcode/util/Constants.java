@@ -22,6 +22,7 @@ public final class Constants {
         public static final double degreesPerTick = 90/vertical;
 
         public static final int rest = 0;
+        public static final int climbConstantPivot = 1370;
     }
     public static final class DriveConstants{
         public static final RevHubOrientationOnRobot params = new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.RIGHT, RevHubOrientationOnRobot.UsbFacingDirection.UP);
@@ -43,6 +44,8 @@ public final class Constants {
         public static final int lowSpecimenDelivery = 900;
 
         public static final int wallSpecimenPickup = 370;
+
+        public static final int climbConstant = 1400;
 
     }
 
@@ -84,6 +87,7 @@ public final class Constants {
 
         public static final double minimum = .06;
         public static final double maximum = .7;
+        public static final double allTheWayBack = .05;
 
 
     }

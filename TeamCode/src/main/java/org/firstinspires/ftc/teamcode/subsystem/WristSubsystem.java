@@ -41,6 +41,9 @@ public class WristSubsystem extends BIBSubsystemBase{
     public void setSubmersibleIntake(){
         wrist.setPosition(Constants.WristConstants.submersibleIntake);
     }
+    public void setAllTheWayBack(){
+        wrist.setPosition(Constants.WristConstants.allTheWayBack);
+    }
 
 
 

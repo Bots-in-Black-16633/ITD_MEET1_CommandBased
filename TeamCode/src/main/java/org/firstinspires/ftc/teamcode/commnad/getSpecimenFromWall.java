@@ -16,7 +16,7 @@ public class getSpecimenFromWall extends SequentialCommandGroup {
 
         addCommands(
                 new PivotRunToCommand(pivot, Constants.PivotConstants.wallPickup),
-                new InstantCommand(wrist::setFacingOppositeBelts),
+                new InstantCommand(wrist::setAllTheWayBack),
 
         new InstantCommand(sp::open),
                 new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.wallSpecimenPickup)

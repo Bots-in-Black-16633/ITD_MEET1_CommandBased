@@ -7,6 +7,7 @@ import org.firstinspires.ftc.teamcode.subsystem.ClimberSubsystem;
 import org.firstinspires.ftc.teamcode.subsystem.ExtendoSubsystem;
 import org.firstinspires.ftc.teamcode.subsystem.PivotSubsystem;
 import org.firstinspires.ftc.teamcode.subsystem.WristSubsystem;
+import org.firstinspires.ftc.teamcode.util.Constants;
 
 public class ClimbCommand extends SequentialCommandGroup {
 
@@ -16,8 +17,8 @@ public class ClimbCommand extends SequentialCommandGroup {
         addCommands(
                 new ResetToIntakeCommand(pivot, extendo,wrist),
                 new InstantCommand(wrist::setFacingOppositeBelts),
-                new PivotRunToCommand(pivot, 1470),
-                new ExtendoRunToCommand(extendo, 1540)
+                new PivotRunToCommand(pivot, Constants.PivotConstants.climbConstantPivot),
+                new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.climbConstant)
         );
         addRequirements(pivot, extendo,wrist);
 

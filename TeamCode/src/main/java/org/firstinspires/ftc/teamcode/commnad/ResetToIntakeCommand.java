@@ -28,7 +28,8 @@ public class ResetToIntakeCommand extends SequentialCommandGroup {
                         new PivotRunToCommand(pivot, Constants.PivotConstants.submersibleIntake),
                         new InstantCommand(),()->pivot.getPosition() < Constants.PivotConstants.submersibleIntake),
                 new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.rest),
-                new InstantCommand(wrist::setFacingStraightParallelToSlider),
+
+                new InstantCommand(wrist::setFacingBelt),
                 new PivotRunToCommand(pivot, Constants.PivotConstants.rest)
         );
 
