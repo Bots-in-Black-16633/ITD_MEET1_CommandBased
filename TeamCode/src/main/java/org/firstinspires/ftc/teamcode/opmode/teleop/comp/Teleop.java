@@ -12,6 +12,7 @@ import org.firstinspires.ftc.teamcode.commnad.HighBasketDeposit;
 import org.firstinspires.ftc.teamcode.commnad.LowBasketDeposit;
 import org.firstinspires.ftc.teamcode.commnad.ResetToIntakeCommand;
 import org.firstinspires.ftc.teamcode.commnad.ResetToRestCommand;
+import org.firstinspires.ftc.teamcode.commnad.SafetyResetToIntakeCommand;
 import org.firstinspires.ftc.teamcode.commnad.SubmersibleIntakeCommand;
 import org.firstinspires.ftc.teamcode.commnad.getSpecimenFromWall;
 import org.firstinspires.ftc.teamcode.util.SampleCommandTeleop;
