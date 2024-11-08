@@ -82,7 +82,7 @@ public final class Constants {
         public static final double highNetOuttake = .221;
         public static final double submersibleIntake = .381;
 
-        public static final double autoIntake = .42;
+        public static final double autoIntake = .47;
 
 
         public static final double minimum = .06;
