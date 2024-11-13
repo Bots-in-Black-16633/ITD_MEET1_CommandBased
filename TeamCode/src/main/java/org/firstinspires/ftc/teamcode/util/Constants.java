@@ -71,8 +71,8 @@ public final class Constants {
 
         //Claw
 
-        public static final double clawClose = .49;
-        public static final double clawOpen = .75;
+        public static final double clawClose = .82;
+        public static final double clawOpen = .62;
     }
 
     public static final class WristConstants{
@@ -98,8 +98,8 @@ public final class Constants {
     }
 
     public static class SpecimenClawConsants{
-        public static double open = .2;
-        public static double close = .4;
+        public static double open = .62;
+        public static double close = .82;
     }
 
     public static final class GrasperConstants {
