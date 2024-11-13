@@ -15,6 +15,8 @@ public class PivotSubsystem extends BIBSubsystemBase{
     public static final int leftMotor = 0;
     public static final int rightMotor = 1;
     public static final int bothMotors = 2;
+
+    public int startPosition = 0;//if the pivot starts in an up position
     DcMotor rightPivot;
     DcMotor leftPivot;
     public PivotSubsystem(HardwareMap hwMap){
@@ -24,6 +26,11 @@ public class PivotSubsystem extends BIBSubsystemBase{
         //reverse any motor directions
         resetEncoders();
     }
+    public void setStartPosition(int startPosition){
+        this.startPosition=startPosition;
+    }
+
+
     public void setPower(double power, int motorType){
         if(motorType==bothMotors||motorType==PivotSubsystem.leftMotor){
             leftPivot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -41,13 +48,13 @@ public class PivotSubsystem extends BIBSubsystemBase{
         if(motorType==bothMotors||motorType==PivotSubsystem.leftMotor){
             leftPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            leftPivot.setTargetPosition(encoderCounts);
+            leftPivot.setTargetPosition(encoderCounts-startPosition);
             leftPivot.setPower(power);
         }
         if(motorType==bothMotors||motorType==PivotSubsystem.rightMotor){
             rightPivot.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
-            rightPivot.setTargetPosition(encoderCounts);
+            rightPivot.setTargetPosition(encoderCounts-startPosition);
             rightPivot.setPower(power);
         }
     }

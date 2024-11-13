@@ -63,6 +63,7 @@ public class TripleSpecimen extends SampleAuto {
                         .strafeToConstantHeading(new Vector2d(37, -16))
                         .strafeToConstantHeading(new Vector2d(47, -16))
                         .strafeToConstantHeading(new Vector2d(47, -70))
+                        .strafeToConstantHeading(new Vector2d(47, -65))
                 .strafeToLinearHeading(new Vector2d(40, -70), Math.toRadians(90.00001))
                 .strafeToConstantHeading(new Vector2d(40, -87))
                 .build());
@@ -100,7 +101,7 @@ public class TripleSpecimen extends SampleAuto {
                         })
                 .strafeToConstantHeading(new Vector2d(30, -63))
                 .strafeToSplineHeading(new Vector2d(40, -75), Math.toRadians(90))
-                .strafeToConstantHeading(new Vector2d(40, -87))
+                .strafeToConstantHeading(new Vector2d(40, -88.5))
                 .build());
         robot.drive.updatePoseEstimate();
 
