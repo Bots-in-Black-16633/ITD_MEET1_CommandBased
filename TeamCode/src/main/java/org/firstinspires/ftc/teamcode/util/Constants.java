@@ -99,7 +99,7 @@ public final class Constants {
 
     public static class SpecimenClawConsants{
         public static double open = .62;
-        public static double close = .82;
+        public static double close = .85;
     }
 
     public static final class GrasperConstants {
