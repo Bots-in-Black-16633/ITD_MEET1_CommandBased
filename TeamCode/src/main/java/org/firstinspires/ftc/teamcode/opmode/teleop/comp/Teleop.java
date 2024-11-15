@@ -15,11 +15,13 @@ import org.firstinspires.ftc.teamcode.commnad.ResetToRestCommand;
 import org.firstinspires.ftc.teamcode.commnad.SafetyResetToIntakeCommand;
 import org.firstinspires.ftc.teamcode.commnad.SubmersibleIntakeCommand;
 import org.firstinspires.ftc.teamcode.commnad.getSpecimenFromWall;
+import org.firstinspires.ftc.teamcode.util.Constants;
 import org.firstinspires.ftc.teamcode.util.SampleCommandTeleop;
 @TeleOp
 public class Teleop extends SampleCommandTeleop {
     @Override
     public void onInit() {
+        robot.pivot.setStartPosition(Constants.PivotConstants.wallPickup);
         //Drive Controls
         robot.drive.setDefaultCommand(robot.drive.getDriveFieldcentric(()->g1.getLeftX(),()->g1.getLeftY(), ()->-g1.getRightX(), .75));
         //Speed Controls, slowmode * fastmode

@@ -63,10 +63,10 @@ public class QuadraSpecimen extends SampleAuto {
                     robot.specimenClaw.close();
                     return false;
                 })
-        .build());
-        robot.drive.updatePoseEstimate();
-
-        Actions.runBlocking(AutoUtil.getDelayAction(.1));
+//        .build());
+//        robot.drive.updatePoseEstimate();
+//
+//        Actions.runBlocking(AutoUtil.getDelayAction(.1));
 
 
 
@@ -74,9 +74,9 @@ public class QuadraSpecimen extends SampleAuto {
 
 
         //Spec 2 deposit
-        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .splineToConstantHeading(new Vector2d(30, -85), Math.toRadians(170))
-                .afterTime(0, (t) -> {
+        //Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
+                //.splineToConstantHeading(new Vector2d(30, -85), Math.toRadians(170))
+                .afterTime(0.5, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery-50, 1);
                     return false;
                 })
@@ -100,16 +100,16 @@ public class QuadraSpecimen extends SampleAuto {
                 .splineToSplineHeading(new Pose2d(40, -85, Math.toRadians(90)), Math.toRadians(270))
                 .splineToConstantHeading(new Vector2d(40, -90), Math.toRadians(270))
                 .afterTime(0, (t) -> {robot.specimenClaw.close();return false;})
-                .build());
+                //.build());
 
-        Actions.runBlocking(AutoUtil.getDelayAction(.25));
-        Actions.runBlocking((t) -> {robot.specimenClaw.close();return false;});
-        Actions.runBlocking(AutoUtil.getDelayAction(.15));
+//        Actions.runBlocking(AutoUtil.getDelayAction(.25));
+//        Actions.runBlocking((t) -> {robot.specimenClaw.close();return false;});
+//        Actions.runBlocking(AutoUtil.getDelayAction(.15));
 
         //Spec 3 Deposit
-        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .splineToConstantHeading(new Vector2d(30, -85), Math.toRadians(170))
-                .afterTime(0, (t) -> {
+        //Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
+                //.splineToConstantHeading(new Vector2d(30, -85), Math.toRadians(170))
+                .afterTime(.5, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery-50, 1);
                     return false;
                 })
@@ -133,20 +133,20 @@ public class QuadraSpecimen extends SampleAuto {
                 .splineToSplineHeading(new Pose2d(40, -85, Math.toRadians(90)), Math.toRadians(270))
                 .splineToConstantHeading(new Vector2d(40, -90), Math.toRadians(270))
                 .afterTime(0, (t) -> {robot.specimenClaw.close();return false;})
-                .build());
+                //.build());
 
-        Actions.runBlocking(AutoUtil.getDelayAction(.25));
-        Actions.runBlocking((t) -> {robot.specimenClaw.close();return false;});
-        Actions.runBlocking(AutoUtil.getDelayAction(.15));
+//        Actions.runBlocking(AutoUtil.getDelayAction(.25));
+//        Actions.runBlocking((t) -> {robot.specimenClaw.close();return false;});
+//        Actions.runBlocking(AutoUtil.getDelayAction(.15));
 
         //Spec 4 Deposit
-        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .splineToConstantHeading(new Vector2d(30, -85), Math.toRadians(170))
-                .afterTime(0, (t) -> {
+        //Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
+                //.splineToConstantHeading(new Vector2d(30, -85), Math.toRadians(170))
+                .afterTime(.5, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery-50, 1);
                     return false;
                 })
-                .splineToSplineHeading(new Pose2d(6, -34, Math.toRadians(270)), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(13, -34, Math.toRadians(270)), Math.toRadians(90))
                 .afterTime(0, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highClipDeposit, 1);
                     return false;
