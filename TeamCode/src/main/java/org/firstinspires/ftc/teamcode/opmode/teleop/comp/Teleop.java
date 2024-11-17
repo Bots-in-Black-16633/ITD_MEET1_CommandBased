@@ -21,7 +21,7 @@ import org.firstinspires.ftc.teamcode.util.SampleCommandTeleop;
 public class Teleop extends SampleCommandTeleop {
     @Override
     public void onInit() {
-        robot.pivot.setStartPosition(Constants.PivotConstants.wallPickup);
+        //robot.pivot.setStartPosition(Constants.PivotConstants.verticalAuto);
         //Drive Controls
         robot.drive.setDefaultCommand(robot.drive.getDriveFieldcentric(()->g1.getLeftX(),()->g1.getLeftY(), ()->-g1.getRightX(), .75));
         //Speed Controls, slowmode * fastmode

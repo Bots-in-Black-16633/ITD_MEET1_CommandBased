@@ -15,7 +15,7 @@ public class getSpecimenFromWall extends SequentialCommandGroup {
     public getSpecimenFromWall(PivotSubsystem pivot, ExtendoSubsystem extendo, WristSubsystem wrist, SpecimenClaw sp){
 
         addCommands(
-                new PivotRunToCommand(pivot, Constants.PivotConstants.wallPickup),
+                new PivotRunToCommand(pivot, Constants.PivotConstants.vertical),
                 new InstantCommand(wrist::setAllTheWayBack),
 
         new InstantCommand(sp::open),

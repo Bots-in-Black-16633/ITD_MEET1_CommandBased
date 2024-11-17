@@ -18,7 +18,7 @@ public class QuadraSpecimen extends SampleAuto {
     @Override
     public void onInit() {
         robot = new BaseRobot(hardwareMap, new Pose2d(0, -64, Math.toRadians(270)));
-        robot.pivot.setStartPosition(1400);
+        robot.pivot.setStartPosition(Constants.PivotConstants.verticalAuto);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class QuadraSpecimen extends SampleAuto {
         //Spec 2 Pickup & Pushing
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
                         .afterTime(0, (t) -> {
-                            robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup, 1);
+                            robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup+25, 1);
                             return false;})
                 .splineToSplineHeading(new Pose2d(32, -64, Math.toRadians(90)), Math.toRadians(90))
                         .splineToConstantHeading(new Vector2d(32, -42), Math.toRadians(0))
@@ -88,13 +88,13 @@ public class QuadraSpecimen extends SampleAuto {
                 .build());
         robot.drive.updatePoseEstimate();
 
-        Actions.runBlocking(AutoUtil.getDelayAction(.25));
+        Actions.runBlocking(AutoUtil.getDelayAction(.35));
         Actions.runBlocking((t) -> {robot.specimenClaw.open();return false;});
 
         //Specimen 3 pickup
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
                         .afterTime(0, (t) -> {
-                            robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup, 1);
+                            robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup+25, 1);
                             return false;
                         })
                 .splineToSplineHeading(new Pose2d(40, -85, Math.toRadians(90)), Math.toRadians(270))
@@ -113,7 +113,7 @@ public class QuadraSpecimen extends SampleAuto {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery-50, 1);
                     return false;
                 })
-                .splineToSplineHeading(new Pose2d(5, -34, Math.toRadians(270)), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(6, -34, Math.toRadians(270)), Math.toRadians(90))
                 .afterTime(0, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highClipDeposit, 1);
                     return false;
@@ -127,7 +127,7 @@ public class QuadraSpecimen extends SampleAuto {
         //Specimen 4 pickup
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
                 .afterTime(0, (t) -> {
-                    robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup, 1);
+                    robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup+25, 1);
                     return false;
                 })
                 .splineToSplineHeading(new Pose2d(40, -85, Math.toRadians(90)), Math.toRadians(270))
