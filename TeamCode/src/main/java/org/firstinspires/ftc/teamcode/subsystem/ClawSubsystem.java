@@ -121,7 +121,7 @@ public class ClawSubsystem extends BIBSubsystemBase {
     @Override
     public void periodic() {
         if(twistState!=lastTwistState) {
-            setTwistPosition(Constants.ClawConstants.twistPositions[twistState]);
+            setTwistPosition(Constants.ClawConstants.twistPositions[twistState%Constants.ClawConstants.twistPositions.length]);
         }
 
         lastTwistState=twistState;
