@@ -7,18 +7,16 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.commnad.ClimbCommand;
 import org.firstinspires.ftc.teamcode.commnad.DeliverHighSpecimen;
-import org.firstinspires.ftc.teamcode.commnad.DeliverLowSpecimen;
 import org.firstinspires.ftc.teamcode.commnad.HighBasketDeposit;
 import org.firstinspires.ftc.teamcode.commnad.LowBasketDeposit;
 import org.firstinspires.ftc.teamcode.commnad.ResetToIntakeCommand;
-import org.firstinspires.ftc.teamcode.commnad.ResetToRestCommand;
-import org.firstinspires.ftc.teamcode.commnad.SafetyResetToIntakeCommand;
 import org.firstinspires.ftc.teamcode.commnad.SubmersibleIntakeCommand;
+import org.firstinspires.ftc.teamcode.commnad.DropAndGrabCommand;
 import org.firstinspires.ftc.teamcode.commnad.getSpecimenFromWall;
-import org.firstinspires.ftc.teamcode.util.Constants;
 import org.firstinspires.ftc.teamcode.util.SampleCommandTeleop;
+
 @TeleOp
-public class Teleop extends SampleCommandTeleop {
+public class ClawTeleop extends SampleCommandTeleop {
     @Override
     public void onInit() {
         //robot.pivot.setStartPosition(Constants.PivotConstants.verticalAuto);
@@ -45,16 +43,15 @@ public class Teleop extends SampleCommandTeleop {
 
 
 
-        //g2.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveOnce(robot.intake.getIntakeCommand(()->g2.getButton(GamepadKeys.Button.BACK)));
-        //g2.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whileActiveOnce(robot.intake.getOuttakeCommand(()->g2.getButton(GamepadKeys.Button.BACK)));
-
-
+        g2.getGamepadButton(GamepadKeys.Button.X).toggleWhenPressed(() -> robot.claw.open(), () -> robot.claw.close());
+        g2.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whileActiveOnce(new InstantCommand(() -> robot.claw.twistCounterclockwise()));
+        g2.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveOnce(new InstantCommand(() -> robot.claw.twistClockwise()));
+        g2.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenActive(new DropAndGrabCommand(                                                           robot.extendo, robot.wrist, robot.claw));
 
         g2.getGamepadButton(GamepadKeys.Button.Y).whenActive(new ResetToIntakeCommand(robot.pivot,robot.extendo,robot.wrist));
         g2.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenActive(new HighBasketDeposit(robot.pivot,robot.extendo,robot.wrist));
         g2.getGamepadButton(GamepadKeys.Button.A).whenActive(new SubmersibleIntakeCommand(robot.pivot,robot.extendo,robot.wrist));
-        g2.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenActive(new LowBasketDeposit(robot.pivot,robot.extendo,robot.wrist));
-        g2.getGamepadButton(GamepadKeys.Button.X).whenActive(new ClimbCommand(robot.pivot,robot.extendo,robot.wrist));
+        //g2.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenActive(new LowBasketDeposit(robot.pivot,robot.extendo,robot.wrist));
         g2.getGamepadButton(GamepadKeys.Button.B).toggleWhenPressed(robot.specimenClaw::open, robot.specimenClaw::close);
         g2.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenActive(new getSpecimenFromWall(robot.pivot,robot.extendo,robot.wrist, robot.specimenClaw));
         g2.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenActive(new DeliverHighSpecimen(robot.pivot,robot.extendo,robot.wrist));

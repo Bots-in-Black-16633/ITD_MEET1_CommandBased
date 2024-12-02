@@ -54,4 +54,8 @@ public class WristSubsystem extends BIBSubsystemBase{
             return;
         });
     }
+
+    public void setDropPosition() {
+        wrist.setPosition(Constants.WristConstants.dropPosition);
+    }
 }

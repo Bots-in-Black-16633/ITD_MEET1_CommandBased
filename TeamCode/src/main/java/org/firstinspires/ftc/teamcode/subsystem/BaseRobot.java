@@ -17,17 +17,19 @@ public class BaseRobot extends BIBSubsystemBase {
     public PivotSubsystem pivot;
     public ExtendoSubsystem extendo;
     public WristSubsystem wrist;
-    public IntakeSubsystem intake;
+    //public IntakeSubsystem intake;
     public AutoUtil autoGenerator;
     public SpecimenClaw specimenClaw;
+    public ClawSubsystem claw;
 
     public BaseRobot(HardwareMap hwMap, Pose2d startPos){
         drive = new DriveSubsystem(hwMap, startPos);
         pivot = new PivotSubsystem(hwMap);
         extendo = new ExtendoSubsystem(hwMap);
         wrist = new WristSubsystem(hwMap);
-        intake = new IntakeSubsystem(hwMap);
+        //intake = new IntakeSubsystem(hwMap);
         specimenClaw = new SpecimenClaw(hwMap);
+        claw = new ClawSubsystem(hwMap);
         autoGenerator = new AutoUtil(drive);
     }
 
@@ -37,9 +39,9 @@ public class BaseRobot extends BIBSubsystemBase {
         drive.printTelemetry(t);
         pivot.printTelemetry(t);
         extendo.printTelemetry(t);
-        intake.printTelemetry(t);
+        //intake.printTelemetry(t);
         wrist.printTelemetry(t);
-
+        claw.printTelemetry(t);
     }
 
     @Override
@@ -48,7 +50,7 @@ public class BaseRobot extends BIBSubsystemBase {
         pivot.periodic();
         extendo.periodic();
         wrist.periodic();
-        intake.periodic();
+        claw.periodic();
         specimenClaw.periodic();
 
 

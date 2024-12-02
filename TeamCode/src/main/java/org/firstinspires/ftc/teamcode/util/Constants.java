@@ -68,7 +68,7 @@ public final class Constants {
         public static final double openTowardsControlHub = .59;
         public static final double openOutwards = .26;
         public static final double openTowardsExpansion = 0;
-        public static final double [] twistPositions = {0, .125, .25, .375, .5};
+        public static final double [] twistPositions = {0, .25, .5, .75, 1};
 
         //Claw
 
@@ -91,6 +91,7 @@ public final class Constants {
         public static final double allTheWayBack = .05;
 
 
+        public static final double dropPosition = .45;
     }
     public static class Util{
         public static double round(double in, int places){

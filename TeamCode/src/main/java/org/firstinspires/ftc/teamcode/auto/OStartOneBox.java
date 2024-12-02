@@ -22,10 +22,10 @@ public class OStartOneBox extends SampleAuto {
         robot.drive.updatePoseEstimate();
         Actions.runBlocking(robot.getHighBasketOuttakeAction());
         Actions.runBlocking(AutoUtil.getDelayAction(1));
-        Actions.runBlocking((t) ->{robot.intake.outtake(.25); return false;});
+        //Actions.runBlocking((t) ->{robot.intake.outtake(.25); return false;});
         Actions.runBlocking(AutoUtil.getDelayAction(1.5));
         robot.drive.updatePoseEstimate();
-        Actions.runBlocking((t) -> {robot.intake.rest();return false;});
+        //Actions.runBlocking((t) -> {robot.intake.rest();return false;});
         Actions.runBlocking(robot.autoGenerator.getBackupToDepositAction(robot.drive.getPose()));
         robot.drive.updatePoseEstimate();
         Actions.runBlocking(robot.getResetToIntakeAction());

@@ -35,8 +35,8 @@ public class SafetyTeleop extends SampleCommandTeleop {
 
 
 
-        g2.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveOnce(robot.intake.getIntakeCommand(()->g2.getButton(GamepadKeys.Button.BACK)));
-        g2.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whileActiveOnce(robot.intake.getOuttakeCommand(()->g2.getButton(GamepadKeys.Button.BACK)));
+       // g2.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveOnce(robot.intake.getIntakeCommand(()->g2.getButton(GamepadKeys.Button.BACK)));
+        //g2.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whileActiveOnce(robot.intake.getOuttakeCommand(()->g2.getButton(GamepadKeys.Button.BACK)));
 
 
 

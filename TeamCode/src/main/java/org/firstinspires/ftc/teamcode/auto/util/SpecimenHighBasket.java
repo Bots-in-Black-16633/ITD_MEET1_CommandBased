@@ -49,7 +49,7 @@ public class SpecimenHighBasket extends SampleAuto {
         robot.drive.updatePoseEstimate();
         Actions.runBlocking(AutoUtil.getDelayAction(1.5));
 
-        Actions.runBlocking((t) -> {robot.intake.intake(1);return false;});
+        //Actions.runBlocking((t) -> {robot.intake.intake(1);return false;});
         Actions.runBlocking((t) -> {robot.wrist.setAutoIntake();return false;});
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
