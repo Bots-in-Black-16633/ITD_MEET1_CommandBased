@@ -18,6 +18,8 @@ public class ClawSubsystem extends BIBSubsystemBase {
     Servo passthrough;
     Servo twist;
     Servo claw;
+    int twistState = 2;
+    int lastTwistState = 2;
     boolean clawOpen = false;
     boolean twistIsHorizontal = false;
     public ClawSubsystem(HardwareMap hwMap){
@@ -29,6 +31,7 @@ public class ClawSubsystem extends BIBSubsystemBase {
     public void setTwistPosition(double position){
         twist.setPosition(position);
     }
+    public void setTwistState(int k) {twistState=k;}
     public void setPassthroughPosition(double position){
         passthrough.setPosition(position);
     }
@@ -110,12 +113,17 @@ public class ClawSubsystem extends BIBSubsystemBase {
         t.addLine("Claw: " + (clawOpen?"Open":"Closed"));
         t.addLine("ClawPos: " + getClawPosition());
         t.addLine("PassthroughPos: " + getPassThroughPosition());
+        t.addLine("Twist State: " + twistState);
         t.addLine("Twist: " + getTwistPosition());
 
     }
 
     @Override
     public void periodic() {
+        if(twistState!=lastTwistState) {
+            setTwistPosition(Constants.ClawConstants.twistPositions[twistState]);
+        }
 
+        lastTwistState=twistState;
     }
 }

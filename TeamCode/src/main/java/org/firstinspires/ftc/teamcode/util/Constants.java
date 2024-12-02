@@ -68,6 +68,7 @@ public final class Constants {
         public static final double openTowardsControlHub = .59;
         public static final double openOutwards = .26;
         public static final double openTowardsExpansion = 0;
+        public static final double [] twistPositions = {0, .125, .25, .375, .5};
 
         //Claw
 
