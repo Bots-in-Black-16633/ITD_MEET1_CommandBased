@@ -19,7 +19,7 @@ public class CommandToActionTest extends SampleAuto {
     @Override
     public void onInit() {
         robot = new BaseRobot(hardwareMap, new Pose2d(0,0,0));
-        a = new CommandToActionWrapper(new HighBasketDeposit(robot.pivot, robot.extendo, robot.wrist));
+        a = new CommandToActionWrapper(new HighBasketDeposit(robot.pivot, robot.extendo, robot.wrist, robot.claw));
     }
 
     @Override

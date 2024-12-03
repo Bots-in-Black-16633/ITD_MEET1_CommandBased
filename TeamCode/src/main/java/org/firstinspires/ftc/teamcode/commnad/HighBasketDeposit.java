@@ -12,7 +12,7 @@ import org.firstinspires.ftc.teamcode.util.Constants;
 public class HighBasketDeposit extends SequentialCommandGroup {
 
 
-    public HighBasketDeposit(PivotSubsystem pivot, ExtendoSubsystem extendo, WristSubsystem wrist){
+    public HighBasketDeposit(PivotSubsystem pivot, ExtendoSubsystem extendo, WristSubsystem wrist, ClawSubsystem claw){
 
         addCommands(
             new ResetToIntakeCommand(pivot,extendo,wrist),
@@ -21,7 +21,8 @@ public class HighBasketDeposit extends SequentialCommandGroup {
 
                 new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.highBasket),
 
-                new InstantCommand(wrist::setOuttakeHighBasket)
+                new InstantCommand(wrist::setOuttakeHighBasket),
+                new InstantCommand(() ->claw.setTwistState(0))
         );
         addRequirements(pivot, extendo,wrist);
     }

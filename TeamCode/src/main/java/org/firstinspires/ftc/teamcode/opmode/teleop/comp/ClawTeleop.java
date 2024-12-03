@@ -48,9 +48,9 @@ public class ClawTeleop extends SampleCommandTeleop {
         g2.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveOnce(new InstantCommand(() -> robot.claw.twistClockwise()));
         g2.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenActive(new DropAndGrabCommand(                                                           robot.extendo, robot.wrist, robot.claw));
 
-        g2.getGamepadButton(GamepadKeys.Button.Y).whenActive(new ResetToIntakeCommand(robot.pivot,robot.extendo,robot.wrist));
-        g2.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenActive(new HighBasketDeposit(robot.pivot,robot.extendo,robot.wrist));
-        g2.getGamepadButton(GamepadKeys.Button.A).whenActive(new SubmersibleIntakeCommand(robot.pivot,robot.extendo,robot.wrist));
+        g2.getGamepadButton(GamepadKeys.Button.Y).whenActive(new ResetToIntakeCommand(robot.pivot,robot.extendo,robot.wrist).andThen(new InstantCommand(() -> robot.claw.setTwistState(0))));
+        g2.getGamepadButton(GamepadKeys.Button.DPAD_UP).whenActive(new HighBasketDeposit(robot.pivot,robot.extendo,robot.wrist, robot.claw));
+        g2.getGamepadButton(GamepadKeys.Button.A).whenActive(new SubmersibleIntakeCommand(robot.pivot,robot.extendo,robot.wrist, robot.claw));
         //g2.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenActive(new LowBasketDeposit(robot.pivot,robot.extendo,robot.wrist));
         g2.getGamepadButton(GamepadKeys.Button.B).toggleWhenPressed(robot.specimenClaw::open, robot.specimenClaw::close);
         g2.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenActive(new getSpecimenFromWall(robot.pivot,robot.extendo,robot.wrist, robot.specimenClaw));

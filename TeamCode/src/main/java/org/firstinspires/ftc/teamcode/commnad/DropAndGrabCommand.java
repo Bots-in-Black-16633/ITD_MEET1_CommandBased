@@ -18,8 +18,8 @@ public class DropAndGrabCommand extends SequentialCommandGroup {
                 new InstantCommand(() -> claw.close()),
                 new WaitCommand(100),
                 new InstantCommand(() -> {wrist.setFacingBelt();
-                    extendo.runToPosition(Constants.ExtendoConstants.rest, 1);
-                    claw.setTwistPosition(Constants.ClawConstants.twistPositions.length/2);}
-                ));
+                    claw.setTwistState(Constants.ClawConstants.twistPositions.length/2);}
+                ),
+                new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.rest));
     }
 }
