@@ -43,11 +43,11 @@ public class Teleop extends SampleCommandTeleop {
 
         //g2.getGamepadButton(GamepadKeys.Button.START).whenActive(new InstantCommand(robot.extendo::resetEncoders));
 
-
+        g2.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveOnce(robot.claw.getManualTwistControlCommand(()->1));
+        g2.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whileActiveOnce(robot.claw.getManualTwistControlCommand(()->-1));
 
         //g2.getGamepadButton(GamepadKeys.Button.RIGHT_BUMPER).whileActiveOnce(robot.intake.getIntakeCommand(()->g2.getButton(GamepadKeys.Button.BACK)));
         //g2.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER).whileActiveOnce(robot.intake.getOuttakeCommand(()->g2.getButton(GamepadKeys.Button.BACK)));
-
 
 
         g2.getGamepadButton(GamepadKeys.Button.Y).whenActive(new ResetToIntakeCommand(robot.pivot,robot.extendo,robot.wrist));

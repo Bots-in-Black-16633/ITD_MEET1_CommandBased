@@ -68,7 +68,12 @@ public final class Constants {
         public static final double openTowardsControlHub = .59;
         public static final double openOutwards = .26;
         public static final double openTowardsExpansion = 0;
-        public static final double [] twistPositions = {0, .25, .5, .75, 1};
+        //back of servo wire is degree amount
+        //back of servo  facing right is 0
+        //positions increase from 0 by 45 degrees
+        public static final double [] twistPositions = {.11, .9, .75, .62, .45, .345, .18, .04};
+        public static final double vertical = .11;
+        public static final double horizantal= .75;
 
         //Claw
 

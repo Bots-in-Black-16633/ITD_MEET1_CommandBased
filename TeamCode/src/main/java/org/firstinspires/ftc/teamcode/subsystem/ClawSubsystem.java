@@ -90,7 +90,13 @@ public class ClawSubsystem extends BIBSubsystemBase {
         twist.setPosition(Constants.ClawConstants.openTowardsControlHub);
 
     }
-
+    public CommandBase getManualTwistControlCommand(DoubleSupplier pow){
+        return this.runEnd(()->{
+            twist.setPosition(twist.getPosition()+pow.getAsDouble()*.025);
+        },()->{
+            return;
+        });
+    }
 
 
     @Override
