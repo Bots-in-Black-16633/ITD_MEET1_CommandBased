@@ -22,6 +22,15 @@ public class WristSubsystem extends BIBSubsystemBase{
         t.addLine("position"+wrist.getPosition());
     }
 
+    public void setWallClawPickupPosition(){
+        wrist.setPosition(Constants.WristConstants.clawWallIntake);
+
+    }
+
+    public void setClawHgihSpecimen(){
+        wrist.setPosition(Constants.WristConstants.clawHighSpecimenDelivery);
+
+    }
 
     public void setFacingBelt(){
         wrist.setPosition(Constants.WristConstants.facingBelts);

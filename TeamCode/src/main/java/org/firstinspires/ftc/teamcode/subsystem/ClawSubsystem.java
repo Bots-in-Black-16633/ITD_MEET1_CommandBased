@@ -30,8 +30,12 @@ public class ClawSubsystem extends BIBSubsystemBase {
         twist.setPosition(position);
     }
     public void setTwistState(int k) {twistState=k;}
-    public void twistCounterclockwise() {if(twistState!=Constants.ClawConstants.twistPositions.length-1)twistState++;}
-    public void twistClockwise() {if(twistState!=0)twistState--;}
+    public void twistCounterclockwise() {if(twistState!=Constants.ClawConstants.twistPositions.length-1)twistState++;
+    /**  (IF WE WANT TO MAKE IT CONTINUOUS) else twistState=0;**/}
+    public void twistClockwise() {
+        if(twistState!=0)twistState--;
+        /** (IF WE WANT TO MAKE IT CONTINUOUS) else twistState=Constants.ClawConstants.twistPositions.length-1;**/
+    }
     public void setClawPosition(double position){
         claw.setPosition(position);
     }

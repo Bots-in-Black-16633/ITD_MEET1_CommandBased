@@ -22,7 +22,7 @@ public class ResetToIntakeCommand extends SequentialCommandGroup {
                                 new InstantCommand(wrist::setFacingOppositeBelts),
                                 new WaitCommand(400)),
                         new InstantCommand(wrist::setFacingBelt),
-                        ()->pivot.getPosition() > Constants.PivotConstants.submersibleIntake+200),
+                        ()->pivot.getPosition() > Constants.PivotConstants.clawWallPickup+200),
 
                 new ConditionalCommand(
                         new PivotRunToCommand(pivot, Constants.PivotConstants.submersibleIntake),

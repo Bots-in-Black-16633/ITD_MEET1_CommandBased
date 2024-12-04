@@ -7,12 +7,14 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import org.firstinspires.ftc.teamcode.commnad.ClimbCommand;
 import org.firstinspires.ftc.teamcode.commnad.DeliverHighSpecimen;
+import org.firstinspires.ftc.teamcode.commnad.DeliverHighSpecimenClaw;
 import org.firstinspires.ftc.teamcode.commnad.HighBasketDeposit;
 import org.firstinspires.ftc.teamcode.commnad.LowBasketDeposit;
 import org.firstinspires.ftc.teamcode.commnad.ResetToIntakeCommand;
 import org.firstinspires.ftc.teamcode.commnad.SubmersibleIntakeCommand;
 import org.firstinspires.ftc.teamcode.commnad.DropAndGrabCommand;
 import org.firstinspires.ftc.teamcode.commnad.getSpecimenFromWall;
+import org.firstinspires.ftc.teamcode.commnad.getSpecimenFromWallClaw;
 import org.firstinspires.ftc.teamcode.util.SampleCommandTeleop;
 
 @TeleOp
@@ -53,8 +55,17 @@ public class ClawTeleop extends SampleCommandTeleop {
         g2.getGamepadButton(GamepadKeys.Button.A).whenActive(new SubmersibleIntakeCommand(robot.pivot,robot.extendo,robot.wrist, robot.claw));
         //g2.getGamepadButton(GamepadKeys.Button.DPAD_DOWN).whenActive(new LowBasketDeposit(robot.pivot,robot.extendo,robot.wrist));
         g2.getGamepadButton(GamepadKeys.Button.B).toggleWhenPressed(robot.specimenClaw::open, robot.specimenClaw::close);
-        g2.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenActive(new getSpecimenFromWall(robot.pivot,robot.extendo,robot.wrist, robot.specimenClaw));
-        g2.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenActive(new DeliverHighSpecimen(robot.pivot,robot.extendo,robot.wrist));
+
+
+        //g2.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenActive(new getSpecimenFromWall(robot.pivot,robot.extendo,robot.wrist, robot.specimenClaw));
+        //g2.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenActive(new DeliverHighSpecimen(robot.pivot,robot.extendo,robot.wrist));
+        g2.getGamepadButton(GamepadKeys.Button.DPAD_LEFT).whenActive(new DeliverHighSpecimenClaw(robot.pivot,robot.extendo,robot.wrist));
+        g2.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT).whenActive(new getSpecimenFromWallClaw(robot.pivot,robot.extendo,robot.wrist, robot.claw));
+
+        new Trigger(()->g2.getButton(GamepadKeys.Button.START) && g2.getButton(GamepadKeys.Button.DPAD_LEFT)).whenActive(new DeliverHighSpecimenClaw(robot.pivot,robot.extendo,robot.wrist));
+        new Trigger(()->g2.getButton(GamepadKeys.Button.START) && g2.getButton(GamepadKeys.Button.DPAD_RIGHT)).whenActive(new getSpecimenFromWallClaw(robot.pivot,robot.extendo,robot.wrist, robot.claw));
+        new Trigger(()->!g2.getButton(GamepadKeys.Button.START) && g2.getButton(GamepadKeys.Button.DPAD_LEFT)).whenActive(new DeliverHighSpecimen(robot.pivot,robot.extendo,robot.wrist));
+        new Trigger(()->!g2.getButton(GamepadKeys.Button.START) && g2.getButton(GamepadKeys.Button.DPAD_RIGHT)).whenActive(new getSpecimenFromWall(robot.pivot,robot.extendo,robot.wrist, robot.specimenClaw));
 
     }
 

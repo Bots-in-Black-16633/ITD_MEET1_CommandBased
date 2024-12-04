@@ -23,6 +23,9 @@ public final class Constants {
 
         public static final int rest = 0;
         public static final int climbConstantPivot = 1370;
+
+        public static final int clawWallPickup = 402;
+        public static final int clawHighSpecimenDelivery = 1650;
     }
     public static final class DriveConstants{
         public static final RevHubOrientationOnRobot params = new RevHubOrientationOnRobot(RevHubOrientationOnRobot.LogoFacingDirection.RIGHT, RevHubOrientationOnRobot.UsbFacingDirection.UP);
@@ -46,6 +49,9 @@ public final class Constants {
         public static final int wallSpecimenPickup = 370;
 
         public static final int climbConstant = 1400;
+        //fr the new spinny claw
+        public static final int clawWallPickup = 0;
+        public static final int clawHighSpecimenDelivery = 826;
 
     }
 
@@ -97,6 +103,8 @@ public final class Constants {
 
 
         public static final double dropPosition = .45;
+        public static final double clawWallIntake = .18;
+        public static final double clawHighSpecimenDelivery = 0;
     }
     public static class Util{
         public static double round(double in, int places){
