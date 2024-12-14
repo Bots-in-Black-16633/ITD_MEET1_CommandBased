@@ -1,7 +1,11 @@
 package org.firstinspires.ftc.teamcode.auto;
 
+import android.os.ParcelFileDescriptor;
+
+import com.acmerobotics.roadrunner.AngularVelConstraint;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.Rotation2d;
+import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
 import com.acmerobotics.roadrunner.ftc.Actions;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -17,75 +21,124 @@ public class QuadraSample extends SampleAuto {
 
     @Override
     public void onInit() {
-        robot = new BaseRobot(hardwareMap, AutoUtil.NETSTART);
+
+        robot = new BaseRobot(hardwareMap, new Pose2d(-40, -63, Math.toRadians(0)));
+        robot.pivot.setStartPosition(Constants.PivotConstants.verticalAuto);
     }
 
     @Override
     public void onStart() {
-        Actions.runBlocking((t) -> {robot.pivot.runToPosition(Constants.PivotConstants.vertical, 1);robot.wrist.setFacingStraightParallelToSlider();return false;});
+        Actions.runBlocking((t) -> {
+            robot.wrist.setOuttakeHighBasket();
+            robot.claw.close();
+            robot.claw.setTwistPosition(.75);
+            robot.pivot.runToPosition(Constants.PivotConstants.vertical, 1);
+            return false;
+        });
 
+        Actions.runBlocking(AutoUtil.getDelayAction(.2));
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .afterTime(0, (t) -> {robot.extendo.runToPosition(Constants.ExtendoConstants.highBasket, 1);return false;})
-                .strafeToSplineHeading(new Vector2d(-63, -46), Math.toRadians(37.5))
-                .afterTime(0, (t) -> {robot.wrist.setOuttakeHighBasket();return false;})
+                .afterTime(0, (t) -> {
+                    robot.extendo.runToPosition(Constants.ExtendoConstants.highBasket, 1);
+
+                    return false;
+                })
+                .strafeToLinearHeading(new Vector2d(-56, -60), Math.toRadians(50), new AngularVelConstraint(.33*Math.PI/2))
                 .build());
         robot.drive.updatePoseEstimate();
+        Actions.runBlocking(AutoUtil.getDelayAction(.5));
+        Actions.runBlocking((t) -> {
+            robot.claw.open();
 
-        Actions.runBlocking(AutoUtil.getDelayAction(.25));
-        //Actions.runBlocking((t) -> {robot.intake.outtake(.5);return false;});
-        Actions.runBlocking(AutoUtil.getDelayAction(1.5));
-        //Sample 2
-        Actions.runBlocking(robot.getResetToIntakeAction());
-        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                //.afterTime(0, (t) -> {robot.wrist.setAutoIntake();robot.intake.intake(1); return false;})
-                .strafeToSplineHeading(new Vector2d(-44, -52), Math.toRadians(97))
-                .strafeToConstantHeading(new Vector2d(-44, -23))
-                //.afterTime(0, (t) -> {robot.intake.rest();robot.pivot.runToPosition(Constants.PivotConstants.vertical, 1);return false;})
-                .afterTime(.5, (t) -> {robot.extendo.runToPosition(Constants.ExtendoConstants.highBasket, 1); return false;})
-                        .strafeToConstantHeading( new Vector2d(-44, -50))
-                .strafeToSplineHeading(new Vector2d(-59, -48), Math.toRadians(45))
-                .build());
-        robot.drive.updatePoseEstimate();
+            //SPEC 2
+            AutoUtil.delay(1);
+            robot.wrist.setDropBlock();
+            AutoUtil.delay(.2);
+            robot.wrist.setSubmersibleIntake();
+            robot.extendo.runToPosition(Constants.ExtendoConstants.rest, .8);
+            AutoUtil.delay(2);
+            robot.pivot.runToPosition(Constants.PivotConstants.rest, .7);
+            //AutoUtil.delay(2);
+            return false;
+        });
 
-        Actions.runBlocking((t) -> {robot.wrist.setOuttakeHighBasket(); return false;});
-        Actions.runBlocking(AutoUtil.getDelayAction(1));
-        //Actions.runBlocking((t) -> {robot.intake.outtake(.5);return false;});
-        Actions.runBlocking(AutoUtil.getDelayAction(1));
-
-        //Sample 3
-        Actions.runBlocking(robot.getResetToIntakeAction());
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                //.afterTime(0, (t) -> {robot.wrist.setAutoIntake();robot.intake.intake(1); return false;})
-                .strafeToSplineHeading(new Vector2d(-56.5, -52), Math.toRadians(100))
-                .strafeToConstantHeading(new Vector2d(-56.5, -27))
-                //.afterTime(0, (t) -> {robot.intake.rest();robot.pivot.runToPosition(Constants.PivotConstants.vertical, 1);return false;})
-                .afterTime(.5, (t) -> {robot.extendo.runToPosition(Constants.ExtendoConstants.highBasket, 1); return false;})
-                .strafeToSplineHeading(new Vector2d(-59, -49), Math.toRadians(45))
-                .build());
-        robot.drive.updatePoseEstimate();
-        Actions.runBlocking((t) -> {robot.wrist.setOuttakeHighBasket(); return false;});
-        Actions.runBlocking(AutoUtil.getDelayAction(1));
-        //Actions.runBlocking((t) -> {robot.intake.outtake(.5);return false;});
-        Actions.runBlocking(AutoUtil.getDelayAction(1));
+                .strafeToSplineHeading(new Vector2d(-38.25, -60), Math.toRadians(90))
+                .strafeToConstantHeading(new Vector2d(-38.25, -52.5), new TranslationalVelConstraint(20)).build());
 
-        //Sample 4
-        Actions.runBlocking(robot.getResetToIntakeAction());
+        Actions.runBlocking((t) -> {
+            robot.wrist.setAutoIntake();
+            AutoUtil.delay(.3);
+            robot.claw.close();
+            AutoUtil.delay(.5);
+            robot.wrist.setOuttakeHighBasket();
+            robot.pivot.runToPosition(Constants.PivotConstants.vertical, 1);
+            AutoUtil.delay(1.5);
+            robot.extendo.runToPosition(Constants.ExtendoConstants.highBasket, 1);
+            return false;
+        });
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .strafeToSplineHeading(new Vector2d(-48, -24), Math.toRadians(180))
-                 //   .afterTime(0, (t) -> {robot.intake.intake(1);robot.wrist.setAutoIntake();return false;})
-                .strafeToConstantHeading(new Vector2d(-72, -24))
-                //.afterTime(0, (t) -> {robot.intake.rest();robot.pivot.runToPosition(Constants.PivotConstants.vertical, 1);return false;})
-                .afterTime(.5, (t) -> {robot.extendo.runToPosition(Constants.ExtendoConstants.highBasket, 1); return false;})
-                .strafeToLinearHeading(new Vector2d(-59, -49), Math.toRadians(45))
-                .build());
+                .strafeToSplineHeading(new Vector2d(-49, -67), Math.toRadians(45), new AngularVelConstraint(.5*Math.PI/2))
+
+                .build()
+
+        );
+        Actions.runBlocking(AutoUtil.getDelayAction(1));
+        Actions.runBlocking((t) -> {
+            robot.claw.open();
+            //Spec 3
+            AutoUtil.delay(1);
+            robot.wrist.setDropBlock();
+            AutoUtil.delay(.2);
+            robot.wrist.setSubmersibleIntake();
+            robot.extendo.runToPosition(Constants.ExtendoConstants.rest, .8);
+            AutoUtil.delay(2);
+            robot.pivot.runToPosition(Constants.PivotConstants.rest, .7);
+            //AutoUtil.delay(2);
+            return false;
+        });
+
+
+        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
+                .strafeToSplineHeading(new Vector2d(-48.25, -62), Math.toRadians(90))
+                .strafeToConstantHeading(new Vector2d(-48.25, -52.5), new TranslationalVelConstraint(30)).build());
+
+        Actions.runBlocking((t) -> {
+            robot.wrist.setAutoIntake();
+            AutoUtil.delay(.3);
+            robot.claw.close();
+            AutoUtil.delay(.5);
+            robot.wrist.setOuttakeHighBasket();
+            robot.pivot.runToPosition(Constants.PivotConstants.vertical, 1);
+            AutoUtil.delay(2);
+            robot.extendo.runToPosition(Constants.ExtendoConstants.highBasket, 1);
+            return false;
+        });
+        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
+                .strafeToSplineHeading(new Vector2d(-49, -67), Math.toRadians(45), new AngularVelConstraint(.5*Math.PI/2))
+
+                .build()
+
+        );
 
         Actions.runBlocking(AutoUtil.getDelayAction(1));
-        Actions.runBlocking((t) -> {robot.wrist.setOuttakeHighBasket();return false;});
-        Actions.runBlocking(AutoUtil.getDelayAction(1));
-       // Actions.runBlocking((t) -> {robot.intake.outtake(.5); return false;});
-        Actions.runBlocking(AutoUtil.getDelayAction(1));
-        Actions.runBlocking(robot.getResetToIntakeAction());
+        Actions.runBlocking((t) -> {
+            robot.claw.open();
+            AutoUtil.delay(1);
+            robot.wrist.setDropBlock();
+            AutoUtil.delay(.2);
+            robot.wrist.setSubmersibleIntake();
+            robot.extendo.runToPosition(Constants.ExtendoConstants.rest, .8);
+            AutoUtil.delay(2);
+            robot.pivot.runToPosition(Constants.PivotConstants.rest, .7);
+            AutoUtil.delay(2);
+            return false;
+        });
+
+
+
+
     }
 
     @Override

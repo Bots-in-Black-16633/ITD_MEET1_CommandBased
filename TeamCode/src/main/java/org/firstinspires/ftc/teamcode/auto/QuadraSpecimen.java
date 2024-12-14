@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.auto;
 
+import com.acmerobotics.roadrunner.AngularVelConstraint;
 import com.acmerobotics.roadrunner.Pose2d;
 import com.acmerobotics.roadrunner.TranslationalVelConstraint;
 import com.acmerobotics.roadrunner.Vector2d;
@@ -24,7 +25,7 @@ public class QuadraSpecimen extends SampleAuto {
     @Override
     public void onStart() {
         //Spec 1 deposit
-        Actions.runBlocking((t) -> {robot.pivot.runToPosition(Constants.PivotConstants.highSpecimenDelivery-100,1); return false;});
+        Actions.runBlocking((t) -> {robot.pivot.runToPosition(Constants.PivotConstants.vertical,1); return false;});
         Actions.runBlocking((t) ->{robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery-50, 1);robot.specimenClaw.close();return false;});
         AutoUtil.delay(.2);
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
@@ -50,15 +51,15 @@ public class QuadraSpecimen extends SampleAuto {
                         .afterTime(0, (t) -> {
                             robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup+25, 1);
                             return false;})
-                .splineToSplineHeading(new Pose2d(32, -64, Math.toRadians(90)), Math.toRadians(90))
-                        .splineToConstantHeading(new Vector2d(32, -42), Math.toRadians(0))
-                        .splineToConstantHeading(new Vector2d(45, -42), Math.toRadians(270))
-                        .splineToConstantHeading(new Vector2d(45, -75), Math.toRadians(160))
+                .splineToSplineHeading(new Pose2d(35.5, -64, Math.toRadians(90)), Math.toRadians(90),new AngularVelConstraint(1.0*Math.PI/2))
+                        .splineToConstantHeading(new Vector2d(35.5, -38), Math.toRadians(0))
+                        .splineToConstantHeading(new Vector2d(45, -38), Math.toRadians(270))
+                        .splineToConstantHeading(new Vector2d(45, -80), Math.toRadians(160))
                 .splineToConstantHeading(new Vector2d(38, -39), Math.toRadians(0))
                 .splineToConstantHeading(new Vector2d(59, -39), Math.toRadians(270))
                 .splineToConstantHeading(new Vector2d(59, -72), Math.toRadians(90))
                 .splineToConstantHeading(new Vector2d(38, -70), Math.toRadians(270))
-                .splineToConstantHeading(new Vector2d(38, -92), Math.toRadians(270))
+                .splineToConstantHeading(new Vector2d(38, -92), Math.toRadians(270), new TranslationalVelConstraint(30))
                 .afterTime(0, (t) -> {
                     robot.specimenClaw.close();
                     return false;
@@ -76,11 +77,11 @@ public class QuadraSpecimen extends SampleAuto {
         //Spec 2 deposit
         //Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
                 //.splineToConstantHeading(new Vector2d(30, -85), Math.toRadians(170))
-                .afterTime(0.5, (t) -> {
+                .afterTime(0.2, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery-50, 1);
                     return false;
                 })
-                .splineToSplineHeading(new Pose2d(3, -33, Math.toRadians(270)), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(3, -31, Math.toRadians(270)), Math.toRadians(90))
                 .afterTime(0, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highClipDeposit, 1);
                     return false;
@@ -97,8 +98,8 @@ public class QuadraSpecimen extends SampleAuto {
                             robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup+25, 1);
                             return false;
                         })
-                .splineToSplineHeading(new Pose2d(40, -85, Math.toRadians(90)), Math.toRadians(270))
-                .splineToConstantHeading(new Vector2d(40, -90), Math.toRadians(270))
+                .splineToSplineHeading(new Pose2d(40, -80, Math.toRadians(90)), Math.toRadians(270), new AngularVelConstraint(1.3*Math.PI/2))
+                .splineToConstantHeading(new Vector2d(40, -90), Math.toRadians(270), new TranslationalVelConstraint(25))
                 .afterTime(0, (t) -> {robot.specimenClaw.close();return false;})
                 //.build());
 
@@ -109,11 +110,11 @@ public class QuadraSpecimen extends SampleAuto {
         //Spec 3 Deposit
         //Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
                 //.splineToConstantHeading(new Vector2d(30, -85), Math.toRadians(170))
-                .afterTime(.5, (t) -> {
+                .afterTime(.2, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery-50, 1);
                     return false;
                 })
-                .splineToSplineHeading(new Pose2d(6, -34, Math.toRadians(270)), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(6, -31, Math.toRadians(270)), Math.toRadians(90), new AngularVelConstraint(1.3*Math.PI/2))
                 .afterTime(0, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highClipDeposit, 1);
                     return false;
@@ -131,7 +132,7 @@ public class QuadraSpecimen extends SampleAuto {
                     return false;
                 })
                 .splineToSplineHeading(new Pose2d(40, -85, Math.toRadians(90)), Math.toRadians(270))
-                .splineToConstantHeading(new Vector2d(40, -90), Math.toRadians(270))
+                .splineToConstantHeading(new Vector2d(40, -90), Math.toRadians(270), new TranslationalVelConstraint(30))
                 .afterTime(0, (t) -> {robot.specimenClaw.close();return false;})
                 //.build());
 
@@ -142,11 +143,11 @@ public class QuadraSpecimen extends SampleAuto {
         //Spec 4 Deposit
         //Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
                 //.splineToConstantHeading(new Vector2d(30, -85), Math.toRadians(170))
-                .afterTime(.5, (t) -> {
-                    robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery-50, 1);
+                .afterTime(.2, (t) -> {
+                    robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery-30, 1);
                     return false;
                 })
-                .splineToSplineHeading(new Pose2d(13, -34, Math.toRadians(270)), Math.toRadians(90))
+                .splineToSplineHeading(new Pose2d(13, -31, Math.toRadians(270)), Math.toRadians(90))
                 .afterTime(0, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highClipDeposit, 1);
                     return false;
@@ -161,7 +162,7 @@ public class QuadraSpecimen extends SampleAuto {
             robot.extendo.runToPosition(Constants.ExtendoConstants.rest, 1);
             return false;
         });
-        Actions.runBlocking(AutoUtil.getDelayAction(5));
+        Actions.runBlocking(AutoUtil.getDelayAction(1));
 
     }
 

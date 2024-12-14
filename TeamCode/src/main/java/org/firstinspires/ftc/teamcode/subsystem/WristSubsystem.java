@@ -44,6 +44,9 @@ public class WristSubsystem extends BIBSubsystemBase{
     public void setFacingOppositeBelts(){
         wrist.setPosition(Constants.WristConstants.facingOppositeBelts);
     }
+    public void setDropBlock() {
+        wrist.setPosition(Constants.WristConstants.dropBlock);
+    }
     public void setOuttakeHighBasket(){
         wrist.setPosition(Constants.WristConstants.highNetOuttake);
     }
@@ -53,7 +56,7 @@ public class WristSubsystem extends BIBSubsystemBase{
     public void setAllTheWayBack(){
         wrist.setPosition(Constants.WristConstants.allTheWayBack);
     }
-
+    public void setWallAutoIntake() {wrist.setPosition(Constants.WristConstants.autoWallIntakePosition);}
 
 
     public CommandBase getManualControlCommand(DoubleSupplier pow){

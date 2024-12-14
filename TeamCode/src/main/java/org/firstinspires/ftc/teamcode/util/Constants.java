@@ -16,7 +16,7 @@ public final class Constants {
         public static final int lowDelivery = 1270;
         public static final int highSpecimenDelivery = 1646;
         public static final int vertical = 1646;
-        public static final int verticalAuto = 1400;
+        public static final int verticalAuto = vertical-100;
 
 
         public static final double degreesPerTick = 90/vertical;
@@ -38,6 +38,8 @@ public final class Constants {
         public static final int lowBasket = 1270;//tuned
         public static final int highBasket = 3100;//tuned
         public static final int lowClip = 1000;
+        public static final int approachUpsideDownClip = 1187;
+        public static final int depositUpsideDownClip = 1675;
 
         public static final int highClipDeposit = 1750;
         public static final int zone1Climb = 1000;
@@ -46,7 +48,7 @@ public final class Constants {
         public static final int highSpecimenDelivery = 2250;
         public static final int lowSpecimenDelivery = 900;
 
-        public static final int wallSpecimenPickup = 370;
+        public static final int wallSpecimenPickup = 330;
 
         public static final int climbConstant = 1400;
         //fr the new spinny claw
@@ -89,12 +91,14 @@ public final class Constants {
 
     public static final class WristConstants{
         public static final double facingBelts = .144;
+        public static final double autoWallIntakePosition = .10;
         public static final double facingStraightParallel = .381;
         public static final double facingOppositeBelts = .654;
         public static final double highNetOuttake = 0.11;
+        public static final double dropBlock = 0;
         public static final double submersibleIntake = .32;
 
-        public static final double autoIntake = .47;
+        public static final double autoIntake = .37;
 
 
         public static final double minimum = .06;
