@@ -31,7 +31,8 @@ public class QuadraSample extends SampleAuto {
         Actions.runBlocking((t) -> {
             robot.wrist.setOuttakeHighBasket();
             robot.claw.close();
-            robot.claw.setTwistPosition(.75);
+            //robot.claw.setTwistState(3);
+            robot.claw.setTwistPosition(.66);
             robot.pivot.runToPosition(Constants.PivotConstants.vertical, 1);
             return false;
         });
@@ -39,6 +40,7 @@ public class QuadraSample extends SampleAuto {
         Actions.runBlocking(AutoUtil.getDelayAction(.2));
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
                 .afterTime(0, (t) -> {
+                    robot.claw.setTwistPosition(.66);
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highBasket, 1);
 
                     return false;
@@ -64,8 +66,8 @@ public class QuadraSample extends SampleAuto {
 
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .strafeToSplineHeading(new Vector2d(-38.25, -60), Math.toRadians(90))
-                .strafeToConstantHeading(new Vector2d(-38.25, -52.5), new TranslationalVelConstraint(20)).build());
+                .strafeToSplineHeading(new Vector2d(-39.25, -60), Math.toRadians(90))
+                .strafeToConstantHeading(new Vector2d(-39.25, -53.5), new TranslationalVelConstraint(20)).build());
 
         Actions.runBlocking((t) -> {
             robot.wrist.setAutoIntake();
@@ -101,8 +103,8 @@ public class QuadraSample extends SampleAuto {
 
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .strafeToSplineHeading(new Vector2d(-48.25, -62), Math.toRadians(90))
-                .strafeToConstantHeading(new Vector2d(-48.25, -52.5), new TranslationalVelConstraint(30)).build());
+                .strafeToSplineHeading(new Vector2d(-49.5, -62), Math.toRadians(90))
+                .strafeToConstantHeading(new Vector2d(-49.25, -54.75), new TranslationalVelConstraint(30)).build());
 
         Actions.runBlocking((t) -> {
             robot.wrist.setAutoIntake();

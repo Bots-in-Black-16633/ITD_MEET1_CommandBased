@@ -114,7 +114,7 @@ public class QuadraSpecimen extends SampleAuto {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery-50, 1);
                     return false;
                 })
-                .splineToSplineHeading(new Pose2d(6, -31, Math.toRadians(270)), Math.toRadians(90), new AngularVelConstraint(1.3*Math.PI/2))
+                .splineToSplineHeading(new Pose2d(2, -31, Math.toRadians(270)), Math.toRadians(90), new AngularVelConstraint(1.3*Math.PI/2))
                 .afterTime(0, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highClipDeposit, 1);
                     return false;

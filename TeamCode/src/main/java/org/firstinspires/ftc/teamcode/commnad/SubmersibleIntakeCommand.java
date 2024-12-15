@@ -14,7 +14,7 @@ public class SubmersibleIntakeCommand extends SequentialCommandGroup {
 
     public  SubmersibleIntakeCommand(PivotSubsystem pivot, ExtendoSubsystem extendo, WristSubsystem wrist, ClawSubsystem claw){
         addCommands(new ResetToIntakeCommand(pivot,extendo,wrist),
-                new InstantCommand(() -> {claw.open();claw.setTwistState(0);}),
+                new InstantCommand(() -> {claw.open();claw.setTwistState(4);}),
                 new PivotRunToCommand(pivot, Constants.PivotConstants.submersibleIntake),
                 new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.submersibleInitialExtension),
                 new InstantCommand(wrist::setSubmersibleIntake)

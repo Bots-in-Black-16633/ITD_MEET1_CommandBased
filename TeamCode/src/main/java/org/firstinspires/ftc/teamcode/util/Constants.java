@@ -79,14 +79,15 @@ public final class Constants {
         //back of servo wire is degree amount
         //back of servo  facing right is 0
         //positions increase from 0 by 45 degrees
-        public static final double [] twistPositions = {.75, .62, .45, .345, .18};
+        //public static final double [] twistPositions = {.104, .249, .36, .503, .66};
+        public static final double [] twistPositions = {.66, .503, .36, .249, .105};
         public static final double vertical = .11;
         public static final double horizantal= .75;
 
         //Claw
 
-        public static final double clawClose = .8;
-        public static final double clawOpen = .95;
+        public static final double clawClose = .74;
+        public static final double clawOpen = 1;
     }
 
     public static final class WristConstants{
