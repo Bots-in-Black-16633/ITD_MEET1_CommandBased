@@ -19,7 +19,7 @@ public class getSpecimenFromWallClaw extends SequentialCommandGroup {
                 new ExtendoRunToCommand(extendo, Constants.ExtendoConstants.clawWallPickup),
 
                 new InstantCommand(wrist::setWallClawPickupPosition),
-                new InstantCommand(()->claw.setTwistState(4)),
+                new InstantCommand(()->claw.setHorizontalIntake()),
 
         new InstantCommand(claw::open));
 

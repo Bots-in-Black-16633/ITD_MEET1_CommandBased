@@ -44,6 +44,10 @@ public class ClawSubsystem extends BIBSubsystemBase {
         claw.setPosition(Constants.ClawConstants.clawOpen);
         clawOpen = true;
     }
+//    public void wideOpen(){
+//        claw.setPosition(Constants.ClawConstants.clawWideOpen);
+//        clawOpen=true;
+//    }
     public void close(){claw.setPosition(Constants.ClawConstants.clawClose);clawOpen = false;}
     public double getClawPosition(){return claw.getPosition();}
     public double getTwistPosition(){

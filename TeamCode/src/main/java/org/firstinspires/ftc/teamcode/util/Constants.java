@@ -48,7 +48,7 @@ public final class Constants {
         public static final int highSpecimenDelivery = 2250;
         public static final int lowSpecimenDelivery = 900;
 
-        public static final int wallSpecimenPickup = 330;
+        public static final int wallSpecimenPickup = 493;
 
         public static final int climbConstant = 1400;
         //fr the new spinny claw
@@ -95,9 +95,11 @@ public final class Constants {
         public static final double autoWallIntakePosition = .10;
         public static final double facingStraightParallel = .381;
         public static final double facingOppositeBelts = .654;
-        public static final double highNetOuttake = 0.11;
+        public static final double highNetOuttake = 0.013;
         public static final double dropBlock = 0;
         public static final double submersibleIntake = .32;
+        public static final double submersibleIntakePlusSome = .36;
+
 
         public static final double autoIntake = .37;
 
