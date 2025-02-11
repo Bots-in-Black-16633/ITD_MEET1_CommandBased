@@ -60,7 +60,7 @@ public class TripleSample extends SampleAuto {
 //            AutoUtil.delay(1);
 //            robot.wrist.setDropBlock();
 //            AutoUtil.delay(.2);
-            robot.wrist.setSubmersibleIntake();
+            robot.wrist.setFacingStraightParallelToSlider();
             Actions.runBlocking(AutoUtil.getDelayAction(.5));
 
             robot.extendo.runToPosition(Constants.ExtendoConstants.rest, .8);
@@ -70,6 +70,8 @@ public class TripleSample extends SampleAuto {
             return false;
         });
        // Actions.runBlocking(AutoUtil.getDelayAction(5));
+        robot.wrist.setDropBlock();
+
 
 //robot.claw.
 
@@ -89,12 +91,17 @@ public class TripleSample extends SampleAuto {
         });
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .strafeToSplineHeading(new Vector2d(-49, -67), Math.toRadians(45), new AngularVelConstraint(.5*Math.PI/2))
+
+                        .afterTime(1.5, (t)->{
+                            robot.wrist.setDropBlock();
+
+                            return false;
+                        })
+                .strafeToSplineHeading(new Vector2d(-51, -65), Math.toRadians(45), new AngularVelConstraint(.5*Math.PI/2))
 
                 .build()
 
         );
-        robot.wrist.setDropBlock();
 
         Actions.runBlocking(AutoUtil.getDelayAction(.5));
         Actions.runBlocking((t) -> {
@@ -102,11 +109,13 @@ public class TripleSample extends SampleAuto {
             //Spec 3
             AutoUtil.delay(.5);
 
-            robot.wrist.setSubmersibleIntake();
+            robot.wrist.setFacingStraightParallelToSlider();
             AutoUtil.delay(.5);
 
             robot.extendo.runToPosition(Constants.ExtendoConstants.rest, .8);
             AutoUtil.delay(2);
+            robot.wrist.setDropBlock();
+
             robot.pivot.runToPosition(Constants.PivotConstants.rest, .7);
             //AutoUtil.delay(2);
             return false;
@@ -128,7 +137,7 @@ public class TripleSample extends SampleAuto {
             return false;
         });
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .strafeToSplineHeading(new Vector2d(-49, -67), Math.toRadians(45), new AngularVelConstraint(.5*Math.PI/2))
+                .strafeToSplineHeading(new Vector2d(-51, -65), Math.toRadians(45), new AngularVelConstraint(.5*Math.PI/2))
 
                 .build()
 
@@ -140,7 +149,7 @@ public class TripleSample extends SampleAuto {
         Actions.runBlocking((t) -> {
             robot.claw.open();
             AutoUtil.delay(.25);
-            robot.wrist.setSubmersibleIntake();
+            robot.wrist.setFacingStraightParallelToSlider();
             AutoUtil.delay(.5);
 
             robot.extendo.runToPosition(Constants.ExtendoConstants.rest, .8);

@@ -48,7 +48,7 @@ public final class Constants {
         public static final int highSpecimenDelivery = 2250;
         public static final int lowSpecimenDelivery = 900;
 
-        public static final int wallSpecimenPickup = 493;
+        public static final int wallSpecimenPickup = 400;
 
         public static final int climbConstant = 1400;
         //fr the new spinny claw

@@ -11,7 +11,6 @@ import org.firstinspires.ftc.teamcode.subsystem.BaseRobot;
 import org.firstinspires.ftc.teamcode.util.Constants;
 import org.firstinspires.ftc.teamcode.util.SampleAuto;
 
-@Disabled
 @Autonomous(name="TripleSpecimen")
 public class TripleSpecimen extends SampleAuto {
     BaseRobot robot;
@@ -19,6 +18,8 @@ public class TripleSpecimen extends SampleAuto {
     @Override
     public void onInit() {
         robot = new BaseRobot(hardwareMap, new Pose2d(12, -63, Math.toRadians(270)));
+        robot.pivot.setStartPosition(Constants.PivotConstants.verticalAuto);
+
     }
 
     @Override
@@ -56,13 +57,13 @@ public class TripleSpecimen extends SampleAuto {
 //        Actions.runBlocking((t) -> {robot.pivot.runToPosition(Constants.PivotConstants.wallPickup, .5);return false;});
 
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .strafeToConstantHeading(new Vector2d(37, -48))
+                .strafeToConstantHeading(new Vector2d(45, -48))
                 .afterTime(.2, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup, .5);
                     robot.pivot.runToPosition(Constants.PivotConstants.wallPickup, .5);
                     return false;
                 })
-                        .strafeToConstantHeading(new Vector2d(37, -16))
+                .strafeToConstantHeading(new Vector2d(45, -16))
                         .strafeToConstantHeading(new Vector2d(47, -16))
                         .strafeToConstantHeading(new Vector2d(47, -70))
                         .strafeToConstantHeading(new Vector2d(47, -65))
