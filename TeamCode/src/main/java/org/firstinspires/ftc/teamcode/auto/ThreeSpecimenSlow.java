@@ -33,7 +33,7 @@ public class ThreeSpecimenSlow extends SampleAuto {
                     robot.wrist.setFacingStraightParallelToSlider();
                     return false;
                 })
-                .strafeToConstantHeading(new Vector2d(0, -35.5))
+                .strafeToConstantHeading(new Vector2d(-10, -35.5))
 
 //                        .afterTime(0, (t) -> {
 //                            robot.extendo.runToPosition(Constants.ExtendoConstants.highClipDeposit, 1);
@@ -49,21 +49,22 @@ public class ThreeSpecimenSlow extends SampleAuto {
         //Spec 2 Pickup & Pushing
         Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
                 .afterTime(0, (t) -> {
-                    robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup-50, 1);
+                    robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup-25, 1);
                     return false;})
-                .strafeToLinearHeading(new Vector2d(35, -64), Math.toRadians(90))
-                .strafeToConstantHeading(new Vector2d(35, -36))
+                .strafeToLinearHeading(new Vector2d(35.5, -64), Math.toRadians(90))
+                .strafeToConstantHeading(new Vector2d(35.5, -36))
                 .strafeToConstantHeading(new Vector2d(45, -36))
-                .strafeToConstantHeading(new Vector2d(45, -80))
-                .strafeToConstantHeading(new Vector2d(45, -39))
-                .strafeToConstantHeading(new Vector2d(59, -39))
-                .strafeToConstantHeading(new Vector2d(59, -72))
+                .strafeToConstantHeading(new Vector2d(55, -80))
                 .strafeToConstantHeading(new Vector2d(38, -70))
-                .strafeToConstantHeading(new Vector2d(38, -90), new TranslationalVelConstraint(10))
+
+                //.strafeToConstantHeading(new Vector2d(55, -39))
+                //.strafeToConstantHeading(new Vector2d(56, -39))
+                //.strafeToConstantHeading(new Vector2d(56, -72))
+                //.strafeToConstantHeading(new Vector2d(38, -70))
+                .strafeToConstantHeading(new Vector2d(38, -85), new TranslationalVelConstraint(10))
                                 .build());
 
 
-        AutoUtil.delay(1);
 
             robot.specimenClaw.close();
         AutoUtil.delay(.5);
@@ -74,7 +75,7 @@ public class ThreeSpecimenSlow extends SampleAuto {
                 //.splineToConstantHeading(new Vector2d(30, -85), Math.toRadians(170))
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery, 1);
                     Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
-                .strafeToLinearHeading(new Vector2d(-5, -31), Math.toRadians(270))
+                .strafeToLinearHeading(new Vector2d(-3, -33), Math.toRadians(270))
                 .afterTime(0, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highClipDeposit, 1);
                     return false;
@@ -91,23 +92,23 @@ public class ThreeSpecimenSlow extends SampleAuto {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.wallSpecimenPickup-25, 1);
                     return false;
                 })
-                .strafeToLinearHeading(new Vector2d(40, -80), Math.toRadians(90), new AngularVelConstraint(1.3*Math.PI/2))
-                .strafeToConstantHeading(new Vector2d(40, -90), new TranslationalVelConstraint(25))
-                .afterTime(0, (t) -> {robot.specimenClaw.close();return false;})
-                //.build());
+                .strafeToLinearHeading(new Vector2d(40, -80), Math.toRadians(90))
+                .strafeToConstantHeading(new Vector2d(40, -85), new TranslationalVelConstraint(30))
+                                .build());
 
-//        Actions.runBlocking(AutoUtil.getDelayAction(.25));
-//        Actions.runBlocking((t) -> {robot.specimenClaw.close();return false;});
-//        Actions.runBlocking(AutoUtil.getDelayAction(.15));
 
+        robot.specimenClaw.close();
+        AutoUtil.delay(.5);
                 //Spec 3 Deposit
                 //Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
                 //.splineToConstantHeading(new Vector2d(30, -85), Math.toRadians(170))
-                .afterTime(.2, (t) -> {
+                robot.drive.updatePoseEstimate();
+        Actions.runBlocking(robot.drive.actionBuilder(robot.drive.getPose())
+                .afterTime(0, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highSpecimenDelivery+50, 1);
                     return false;
                 })
-                .strafeToLinearHeading(new Vector2d(2, -31), Math.toRadians(270), new AngularVelConstraint(1.3*Math.PI/2))
+                .strafeToLinearHeading(new Vector2d(2, -33), Math.toRadians(270))
                 .afterTime(0, (t) -> {
                     robot.extendo.runToPosition(Constants.ExtendoConstants.highClipDeposit, 1);
                     return false;
@@ -153,6 +154,7 @@ public class ThreeSpecimenSlow extends SampleAuto {
 
         Actions.runBlocking((t) -> {
             robot.extendo.runToPosition(Constants.ExtendoConstants.rest, 1);
+            robot.pivot.runToPosition(Constants.PivotConstants.rest,1);
             return false;
         });
         Actions.runBlocking(AutoUtil.getDelayAction(1));
